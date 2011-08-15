@@ -8,6 +8,7 @@
 	<script src="js/ace/mode-html.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ace/mode-css.js" type="text/javascript" charset="utf-8"></script>
 	<script src='js/jquery.min.js'></script>
+	<script src='js/jqeury.tmpl.min.ks'></script>
 
 	<script src='js/slides.js'></script>
 	<script src='js/prettify.js'></script>
@@ -27,8 +28,122 @@
 	<h1>HTML5 Workshop #4<br/>jQuery, Ajax & Javascript</h1>
 	</article>
 
-	<article >
-	<div class='code'><div id='samplecode' class='editor'>This is atextarea</div></div>
+	<article>
+	<h1>HTML/CSS Are Static</h1>
+	<p>(Now only mostly true, as you can add interactivity via CSS Hover, Animation)</p>
+	</article>
+
+	<article>
+	<h1>Anything else dynamic is programmed</h1>
+	<ul>
+		<li>Animation effects</li>
+		<li>Sliders</li>
+		<li>Drag and Drop</li>
+		<li>Autocomplete</li>
+		<li>Ajax </li>
+
+	</ul>
+	</article>
+
+	<article>
+    <h1>And, unless it's flash..</h1>
+  	<p>It's programmed in Javascript<br/>"Lingua Franca" of the Web</p>
+	</article>
+
+  <article>
+    <h1>About Javascript</h1>
+    <ul>
+      <li>First created in '96</li>
+      <li>Nothing, whatsoever to do with Java. </li>
+      <li>People hated it for a long time. Now everyone loves it.</li>
+      <li>Atwood's Law: Anything that can be written in Javascript, eventually will.</li>
+      <li>Now can be used for:
+        <ul>
+          <li>Client Side (duh)</li>
+          <li>Server Side</li>
+          <li>Mobile (iPhone, Android)</li>
+          <li>Desktop</li>
+        </ul>
+      </li>
+    </ul>
+  </article>
+
+  <article>
+    <h1>Early Praise Javascript</h1>
+    <p>“I was convinced that we needed to build-in a programming language, but the developers, Tim ﬁrst, were very much opposed. It had to remain completely declarative. Maybe, but the net result is that the programming- vacuum ﬁlled itself with the most horrible kludge in the history of computing: Javascript.” -Robert Cailliau</p>
+  </article>
+
+  <article>
+    <h1>Why so much early hate for JavaScript?</h1>
+    <ul>
+      <li>Incompatible Implementations</li>
+      <li>OO, but not a classical inheritance</li>
+      <li>Initial Implementation were slow</li>
+      <li>It looked like a silly toy next to Flash</li>
+      <li>No AJAX to start with (while Flash did)</li>
+    </ul>
+  </article>
+
+
+  <article>
+    <h1>What Changed?</h1>
+    <ul>
+      <li>The "Gmail" and "Goole Maps Era" (2004-2005)</li>
+      <li>"Framework Era" (2005-Today)</li>
+      <li><a href='http://news.cnet.com/8301-1001_3-10030888-92.html'>"Chrome Era" (2008-Today)</a></li>
+    </ul>
+  </article>
+
+
+
+  <article class='full-code'>
+    <h2>Where does Javascript go?</h2>
+    <p>Similar to CSS - multiple options (notice: type='text/javascript' <em>NOT</em> required in HTML5):</p>
+    <ul>
+      <li>Include external .js file via:
+        <pre>&lt;script src='file.js'&gt;&lt;/script&gt;</pre>
+      </li>
+      <li>Include in the &lt;head&gt; tag
+       <pre>&lt;script&gt;
+// Our Javascript Code Goes Here
+&lt;/script&gt;</pre>
+      </li>
+      <li>Include in the &lt;body&gt; tag
+       <pre>&lt;script&gt;
+  document.write("Let's write some HTML right here!");
+&lt;/script&gt;</pre>
+      </li>
+      <li> Include as an event
+      <pre>&lt;a href='javascript:void(0);' onclick='alert("Hello World!");'&gt;</pre>
+      </li>
+    </ul>
+  </article>
+
+
+  <article >
+  <h2>Where do we prefer?</h2>
+  <p>Also Similar to CSS - the less 'inline' the better. (Generalization)</p>
+    <ul>
+      <li><b>Best:</b> Include external .js file</li>
+      <li><b>Less Good:</b> Include in the &lt;head&gt; tag</li>
+      <li><b>Even Less Good:</b> Include in the &lt;body&gt; tag</li>
+      <li><b>Downright Bad:</b> Include as an event</li>
+    </ul>
+  </article>
+  
+
+
+	<article class='editor-slide' >
+	  <h1>Hello World</h1>
+  	<div class='code'>
+  		<div id='samplecode' class='editor' data-language='js' data-target='sampledest'>
+alert("Hello World!");
+      </div>
+    </div>
+
+    <div class='destination' id='sampledest'>
+
+    </div>
 	</article>
 
 </section>

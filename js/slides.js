@@ -11,7 +11,7 @@
   URL: http://code.google.com/p/html5slides/
 */
 
-var PERMANENT_URL_PREFIX = 'css/styles.css';
+var PERMANENT_URL_PREFIX = '';
 
 var SLIDE_CLASSES = ['far-past', 'past', 'current', 'next', 'far-next'];
 
