@@ -655,25 +655,26 @@ article.smaller q::after {
 }
 
 .code { 
+  top:170px;
   position:absolute;
   left:10px;
   width:45%;
-
-  
 }
+
 .editor {  
   left:0px;
-  height:500px;
+  height:480px;
   width:100%;
  }
 
 
 .destination {
   position:absolute;
+  top:170px;
   right:10px;
   width:45%;
   border:1px solid #CCC;
-  height:500px;
+  height:480px;
   margin-top:20px;
 
   padding:1px;

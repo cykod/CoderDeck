@@ -47,6 +47,11 @@ $(document).ready(function() {
     disableKeyboardEvents = false;
   }
 
+  $(document).bind('slideleave',function(e) {
+    $('.destination').html("");
+
+  });
+
   $(document).bind("slideenter",function(e) {
     var current = $(".current");
     current.find(".editor").each(function() {
@@ -56,12 +61,26 @@ $(document).ready(function() {
         $(this).addClass('codeEditor');
         editor.getSession().setMode(new JavaScriptMode());
 
+        if($(this).attr('data-script')) {
+          var html = $("#" + $(this).attr('data-script')).html().replace(/SCRIPT/g,'<script>').replace(/END/,'</s' + 'cript>');
+          editor.getSession().setValue(html);
+        }
+
         $(this).data('editor',editor);
         editor.on('focus', focusCallback);
         editor.on('blur', blurCallback);
         $("<button>Run</button>").insertBefore(this).click(function() {
           runCode(element);
         });
+
+        var solution = $(this).attr('data-solution');
+        if(solution) {
+          $("<button>Solution</button>").insertBefore(this).click(function() {
+              var html = $("#" + solution).html().replace(/SCRIPT/g,'<script>').replace(/END/,'</s' + 'cript>');
+          editor.getSession().setValue(html);
+
+          });
+        }
       }
     });
 
