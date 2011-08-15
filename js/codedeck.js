@@ -15,7 +15,7 @@ $(document).ready(function() {
 
   $(document).bind("slideenter",function(e) {
     var current = $(".current");
-    current.find(".code").each(function() {
+    current.find(".code > .editor").each(function() {
       if(!$(this).hasClass('codeEditor')) {
         var editor = ace.edit(this.id);
         $(this).addClass('codeEditor');
