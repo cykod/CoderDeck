@@ -654,19 +654,22 @@ article.smaller q::after {
   color: rgb(127, 0, 127);
 }
 
-.code { 
-  top:170px;
+.code-wrapper {
   position:absolute;
+  top:170px;
   left:10px;
-  width:45%;
+  width:400px;
+  height:480px;
 }
 
-.editor {  
-  left:0px;
-  height:480px;
-  width:100%;
- }
-
+.code-editor { 
+  top:190px;
+  position:absolute;
+  left:10px;
+  height:460px;
+  width:400px;
+  visibility:hidden;
+}
 
 .destination {
   position:absolute;

@@ -211,25 +211,19 @@ require(["jquery", "jquery.alpha", "jquery.beta"], function($) {
 	<article class='editor-slide' >
 	  <h2>Hello World</h2>
     <p>Call the built-in 'alert' function and have it say "Hello World!"</p>
-  	<div class='code'>
-  		<div id='samplecode' class='editor' data-language='js' data-target='sampledest' data-solution='hello-script'>
-      </div>
-    </div>
+    <div class='code-editor' data-language='js'></div>
 
-    <script type='codedeck/javsacript' id='hello-script'>
+    <script type='codedeck'>
 alert('Hello World!');
     </script>
 
-    <div class='destination' id='sampledest'>
-
-    </div>
+    <div class='destination'></div>
 	</article>
 
 	<article class='editor-slide' >
 	  <h2>Variables</h2>
     <p>Variables are defined with <b>var</b> and are 'scoped' by functions. Interior functions have access to variables.</p>
-  	<div class='code'>
-  		<div id='variables-scope' class='editor' data-language='js' data-target='variables-scope-destination' >
+  	<div class='code-editor' data-language='js'>
 var linebreak =  "&lt;br/&gt;";
 
 var variableA = 'I am variable a';
@@ -248,15 +242,38 @@ try {
   document.write("No variable B!");
 }
       </div>
-    </div>
-
-    <div class='destination' id='variables-scope-destination'>
+    <div class='destination'>
 
     </div>
 	</article>
 
   <article class='editor-slide'>
+    <h2>Functions</h2>
+    <p>You can create your own functions and use existing functions. Functions are called with a <b>functionName()</b> and can be passed parameters</p>
 
+    <div class='code-editor' data-language='js'>
+// myFunction should return the value of a added to b 
+// and multiply the whole thing by 2
+function myFunction(a,b) {
+
+}      
+
+// Should be 60
+alert(myFunction(10,20));
+    </div>
+
+   <script type='codedeck'>
+// myFunction should return the value of a added to b 
+// and multiply the whole thing by 2
+function myFunction(a,b) {
+   return (a + b) * 2;
+}      
+
+// Should be 60
+alert(myFunction(10,20));
+    </script>
+
+    <div class='destination'></div>
 
   </article>
 
@@ -264,18 +281,16 @@ try {
 	<article class='editor-slide' >
 	  <h2>Prompt it</h2>
     <p>Try calling the <b>prompt</b> method instead of <b>alert</b>, and then calling <b>alert</b> on the returned value.</p>
-  	<div class='code'>
-  		<div id='samplecode2' class='editor' data-language='js' data-solution='hello-script2' data-target='sampledest2' >
+  	<div class='code-editor' data-language='js'>
 alert("Hello World!");
-      </div>
     </div>
 
-    <script type='codedeck/javsacript' id='hello-script2'>
+    <script type='codedeck'>
 var result = prompt('Give me some data');
 alert(result);
     </script>
 
-    <div class='destination' id='sampledest2'>
+    <div class='destination'>
 
     </div>
 	</article>

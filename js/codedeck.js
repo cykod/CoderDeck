@@ -47,6 +47,22 @@ $(document).ready(function() {
     disableKeyboardEvents = false;
   }
 
+  $("article").each(function(idx) {
+    var slide = $(this);
+
+    slide.find(".code-editor").attr({
+        'id': 'editor-' + idx,
+        'data-target' : 'destination-' + idx
+    }).wrapAll("<div class='code-wrapper'></div>").css('position','static');
+    slide.find(".destination").attr('id','destination-' + idx);
+    var solution = slide.find("script[type=codedeck]")[0]
+    if(solution) {
+      $(solution).attr({ 'id' : 'solution-' + idx });
+      slide.find(".code-editor").attr({ 'data-solution' : 'solution-' + idx });
+    }
+
+  });
+
   $(document).bind('slideleave',function(e) {
     $('.destination').html("");
 
@@ -54,9 +70,10 @@ $(document).ready(function() {
 
   $(document).bind("slideenter",function(e) {
     var current = $(".current");
-    current.find(".editor").each(function() {
+    current.find(".code-editor").each(function() {
       if(!$(this).hasClass('codeEditor')) {
         var element = this;
+        $(this).css('visibility','visible');
         var editor = ace.edit(this.id);
         $(this).addClass('codeEditor');
         editor.getSession().setMode(new JavaScriptMode());
