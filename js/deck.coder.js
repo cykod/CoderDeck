@@ -43,7 +43,7 @@ This module adds a code editor that shows up in individual slides
       code = "<scr" + "ipt>\n" + code + "\n</scr" + "ipt>";
     }
 
-    var tmpl = $("#coderdeck-default").html();
+    var tmpl = $(template ? "#" + template : "#coderdeck-default").html();
 
     code = "<!DOCTYPE HTML>" + tmpl.replace(/END/,'</s' + 'cript>').replace(/CODE/,code);
 
@@ -129,6 +129,10 @@ This module adds a code editor that shows up in individual slides
 
         var html = element.html().replace(/SCRIPT/g,'<script>').replace(/END/,'</s' + 'cript>').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
 
+
+        var isFull = $(element).data('full');
+        var isInstant = $(element).data('instant');
+
         $(element).css('visibility','visible');
 
         var editorOptions = { 
@@ -137,7 +141,7 @@ This module adds a code editor that shows up in individual slides
           onBlur: function() { editorFocused = false; } 
         };
 
-        if($(element).data('instant')) {
+        if(isInstant) {
           editorOptions['onChange'] =  function() { runCode(element); }
         }
         var editor = CodeMirror.fromTextArea(element[0], editorOptions );
@@ -149,9 +153,6 @@ This module adds a code editor that shows up in individual slides
 
 
         var language = $(element).attr('data-language');
-
-
-        var isFull = $(element).data('full');
 
         setTimeout(function() {
           if($(element).attr('data-save') && localStorage[$(element).attr('data-save')]) {
@@ -169,15 +170,16 @@ This module adds a code editor that shows up in individual slides
 
         destination.css('height',$(current).height() - $(this).position().top - 80);
 
+        if(!isInstant) {
+          $("<button>Run</button>").insertBefore(wrapper).click(function() {
+            if(isFull) {  
+              $(wrapper).hide();
+            }
+            $(destination).show();
+            runCode(element,$(element).attr('data-coder-template'));
 
-        $("<button>Run</button>").insertBefore(wrapper).click(function() {
-          if(isFull) {  
-            $(wrapper).hide();
-          }
-          $(destination).show();
-          runCode(element);
-
-        });
+          });
+        }
 
         if(isFull) { 
           $("<button>Back</button>").insertBefore(wrapper).click(function() {
@@ -187,8 +189,9 @@ This module adds a code editor that shows up in individual slides
         }
 
 
-        if($(element).data('instant')) {
-           runCode(element);
+        if(isInstant) {
+           runCode(element,$(element).attr('data-coder-template'));
+           $(destination).show();
         }
 
         var solution = element.attr('data-solution');
