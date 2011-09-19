@@ -1,0 +1,144 @@
+$main-color:#444;
+$callout-color:#bf0000;
+$complimentary-color:#d3502c;
+
+@mixin sans-font {
+	font-family:'Open Sans', sans-serif;
+	font-weight:400;	
+} 
+
+@mixin sans-bold-font {
+	font-family:'Open Sans', sans-serif;
+	font-weight:700;	
+}
+
+@mixin slab-font {
+	font-family: 'Arvo', serif;
+	font-weight:400;
+}
+
+@mixin condensed-font {
+	font-family: 'Open Sans Condensed', sans-serif; 
+	font-weight:300;
+}
+
+.deck-container {
+	@include sans-font;
+	font-size:1.25em;
+	background:#fff;
+	
+	.slide {
+		background:#fff;
+	}
+	
+	.slide-title {
+		background:black;
+		h1 { @include slab-font; color:$complimentary-color; text-transform:none;}
+	}
+	
+	.slide-list {
+		h2 { font-size:3.5em; border-bottom:4px solid $complimentary-color; padding-bottom:.07em; margin-bottom:.3em; }
+		h3 { font-size:1.4em; color:$main-color; margin-bottom:.1em;}
+		ul { margin-left:1em;  list-style-type: square; @include sans-font;  color:$complimentary-color;}
+		li { padding-left:.5em; }
+		p { @include sans-font; font-size: .9em; color:$main-color;}
+		
+	}
+	
+	.slide-subhead { 
+		h1 { font-size:5em; }
+		h2 { font-size:2em; text-align:center; margin-top:.1em;}
+	}
+	
+	h1 {
+		@include sans-bold-font;
+		letter-spacing:-0.04em;
+		font-size: 5em;
+		line-height: .9em;
+		text-transform:uppercase;
+		padding-top:7em;
+		color:#000;
+	}
+
+
+	h2 {
+		@include slab-font;
+		color:$callout-color;
+		border:none;
+	}
+
+	h3 {
+		font-family:'Open Sans', sans-serif;
+		font-weight:800;
+
+	}
+
+	pre {
+		border-color:$complimentary-color;
+	}
+
+	code {
+		color:#888;
+	}
+
+	blockquote {
+		font-size:2em;
+		font-style:italic;
+		padding:1em 2em;
+		color:#000;
+		border-left:5px solid $complimentary-color;
+
+		p {
+			margin:0;
+		}
+
+		cite {
+			font-size:.5em;
+			font-style:normal;
+			font-weight:bold;
+			color:#888;
+		}
+	}
+	
+	::-moz-selection{ background:$callout-color; color:#fff; }
+	::selection { background:$callout-color; color:#fff; }
+	
+	a {
+		&, &:hover, &:focus, &:active, &:visited {
+			color:$callout-color;
+			text-decoration:none;
+		}
+		
+		&:hover, &:focus {
+			text-decoration:underline;
+		}
+	}
+	
+	.deck-prev-link, .deck-next-link {
+		background:$complimentary-color;
+		font-family:serif; // sans-serif arrows x-browser fail
+		
+		&, &:hover, &:focus, &:active, &:visited {
+			color:#fff;
+		}
+		
+		&:hover, &:focus {
+			background:$callout-color;
+			text-decoration:none;
+		}
+	}
+	
+	.deck-status {
+		font-size:0.6666em;
+	}
+	
+	&.deck-menu {
+		.slide {
+			background:#eee;
+		}
+		
+		.deck-current {
+			background:#ddf;
+		}
+	}
+}

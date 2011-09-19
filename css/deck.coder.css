@@ -1,0 +1,46 @@
+
+.deck-container {
+  width:auto;
+  padding:0 10%;
+
+}
+
+.coder-wrapper {
+  width:100%; 
+  position:relative;
+
+}  
+
+.deck-container .coder-editor-wrapper { 
+  border:1px solid #CCCCCC;
+  padding:5px 1%;
+}
+
+.deck-container .coder-editor-wrapper pre {
+  font-family: monospace, sans-serif;
+  font-size:18px;
+}
+
+.deck-container .coder-destination { 
+  display:none;
+  padding:5px 1%;
+  border:1px solid #CCCCCC;
+}
+
+
+.deck-container .coder-wrapper-split .coder-editor-wrapper { 
+  border:1px solid #CCCCCC;
+  padding:5px 1%;
+  width:48%;
+}
+
+
+.deck-container .coder-wrapper-split .coder-destination { 
+  border:1px solid #CCCCCC;
+  padding:5px 1%;
+  position:absolute; left:50%; bottom:0px;
+  width:48%;
+
+}
+
+

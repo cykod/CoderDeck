@@ -1,302 +1,186 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title></title>
-	<script src="js/ace/ace-uncompressed.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/ace/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/ace/mode-html.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/ace/mode-css.js" type="text/javascript" charset="utf-8"></script>
-	<script src='js/jquery.min.js'></script>
-	<script src='js/jqeury.tmpl.min.ks'></script>
-
-	<script src='js/slides.js'></script>
-	<script src='js/prettify.js'></script>
-	<script src='js/codedeck.js'></script>
-
-		<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" />
-
+	<meta charset="utf-8">
+	<title>HTML5 Workshop #6</title>
+	<meta name="viewport" content="width=1024">
+	
+	<!-- Replace path with correct path to deck.core.css. -->
+	<link rel="stylesheet" href="css/deck.core.css" type="text/css">
+	
+	<!-- Any other extension CSS files go here. -->
+	<!-- link rel="stylesheet"  id='transition-theme-link' href="horizontal-slide.css" type="text/css" --> 
+	<link rel="stylesheet" id='style-theme-link' href="css/coderdeck.css" type="text/css" >
+	
+	<!-- Core and extension CSS files -->
+	<link rel="stylesheet" href="css/deck.navigation.css">
+	<link rel="stylesheet" href="css/deck.status.css">
+	<link rel="stylesheet" href="css/deck.hash.css">
+	<link rel="stylesheet" href="css/deck.coder.css">
+	
+	<!-- Replace path with correct path to Modernizr file. -->
+	<script src="js/modernizr.js"></script>
 </head>
-<body>
+<body class="deck-container">
 
+<script type='text/coderdeck' id='coderdeck-default'>
+  <html>
+    <head>
+      <script src='js/jquery.min.js'>END
+    </head>
+    <body>
+	    CODE
+    </body>
+</html>
+</script>
 
- <section class='slides layout-regular'>
+<!-- Create any number of elements with class slide within the container -->
+<article class='slide slide-subhead'>
+<h1>HTML5 Workshop #6</h1>
+<h2>Putting it all together<br/>
+ <a href='http://bit.ly/html5workshop6'>http://bit.ly/html5workshop6</a></h2>
+</article>
 	
-      
-	<article class='title'>
-	<h1>HTML5 Workshop #4<br/>jQuery, Ajax & Javascript</h1>
-	</article>
+<article class='slide slide-list'>
+<h2>What we've learned</h2>
+<ol>
+	<li class='slide'><h3>HTML5 Basics &amp; Semantic Structure</h3></li>
+	<li class='slide'><h3>The Perfect Chop &amp; Layout basics</h3></li>
+	<li class='slide'><h3>CSS styling &amp; Responsive Design</h3></li>
+	<li class='slide'><h3>Javascript & jQuery</h3></li>
+	<li class='slide'><h3>More Javascript, Events, Ajax &amp; JS Templates</h3></li>
+</ol>
+</article>
 
-	<article>
-	<h1>HTML/CSS Are Static</h1>
-	<p>(Now only mostly true, as you can add interactivity via CSS Hover, Animation)</p>
-	</article>
+<article class='slide slide-subhead'>
+<h1>Mashup Time</h1>
+<h2>Friend Explorer with Facebook API</h2>
+</article>
 
-	<article>
-	<h1>Anything else dynamic is programmed</h1>
-	<ul>
-		<li>Animation effects</li>
-		<li>Sliders</li>
-		<li>Drag and Drop</li>
-		<li>Autocomplete</li>
-		<li>Ajax </li>
+<article class='slide slide-list'>
+<h2>The Plan</h2>
+<ol>
+	<li class='slide' ><h3>Connect to facebook API</h3></li>
+	<li class='slide' ><h3>Pull a list of your friends</h3></li>
+	<li class='slide' ><h3>Find a list of all the things your friends like.</h3></li>
+</ol>
 
-	</ul>
-	</article>
-
-	<article>
-    <h1>And, unless it's flash..</h1>
-  	<p>It's programmed in Javascript<br/>"Lingua Franca" of the Web</p>
-	</article>
-
-  <article>
-    <h1>About Javascript</h1>
-    <ul>
-      <li>First created in '96</li>
-      <li>Nothing, whatsoever to do with Java. </li>
-      <li>People hated it for a long time. Now everyone loves it.</li>
-      <li>Atwood's Law: Anything that can be written in Javascript, eventually will.</li>
-      <li>Now can be used for:
-        <ul>
-          <li>Client Side (duh)</li>
-          <li>Server Side</li>
-          <li>Mobile (iPhone, Android)</li>
-          <li>Desktop</li>
-        </ul>
-      </li>
-    </ul>
-  </article>
-
-  <article>
-    <h1>Early Praise Javascript</h1>
-    <p>“I was convinced that we needed to build-in a programming language, but the developers, Tim ﬁrst, were very much opposed. It had to remain completely declarative. Maybe, but the net result is that the programming- vacuum ﬁlled itself with the most horrible kludge in the history of computing: Javascript.” -Robert Cailliau</p>
-  </article>
-
-  <article>
-    <h1>Why so much early hate for JavaScript?</h1>
-    <ul>
-      <li>Incompatible Implementations</li>
-      <li>OO, but not a classical inheritance</li>
-      <li>Initial Implementation were slow</li>
-      <li>It looked like a silly toy next to Flash</li>
-      <li>No AJAX to start with (while Flash did)</li>
-    </ul>
-  </article>
-
-
-  <article>
-    <h1>What Changed?</h1>
-    <ul>
-      <li>The "Gmail" and "Goole Maps Era" (2004-2005)</li>
-      <li>"Framework Era" (2005-Today)</li>
-      <li><a href='http://news.cnet.com/8301-1001_3-10030888-92.html'>"Chrome Era" (2008-Today)</a></li>
-    </ul>
-  </article>
+</article>
 
 
 
-  <article class='full-code'>
-    <h2>Where does Javascript go?</h2>
-    <p>Similar to CSS - multiple options (notice: type='text/javascript' <em>NOT</em> required in HTML5):</p>
-    <ul>
-      <li>Include external .js file via:
-        <pre>&lt;script src='file.js'&gt;&lt;/script&gt;</pre>
-      </li>
-      <li>Include in the &lt;head&gt; tag
-       <pre>&lt;script&gt;
-// Our Javascript Code Goes Here
-&lt;/script&gt;</pre>
-      </li>
-      <li>Include in the &lt;body&gt; tag
-       <pre>&lt;script&gt;
-  document.write("Let's write some HTML right here!");
-&lt;/script&gt;</pre>
-      </li>
-      <li> Include as an event
-      <pre>&lt;a href='javascript:void(0);' onclick='alert("Hello World!");'&gt;</pre>
-      </li>
-    </ul>
-  </article>
-
-
-  <article >
-  <h2>Where do we prefer?</h2>
-  <p>Also Similar to CSS - the less 'inline' the better. (Generalization)</p>
-    <ul>
-      <li><b>Downright Bad:</b> Include as an event</li>
-      <li><b>Even Less Good:</b> Include in the &lt;body&gt; tag</li>
-      <li><b>Less Good:</b> Include in the &lt;head&gt; tag</li>
-      <li><b>Best:</b> Include external .js file</li>
-      <li><b>Bestest:</b> Load Asynchronously*</li>
-    </ul>
-  </article>
-
-
-  <article>
-   <h2>How is it executed?</h2>
-   <ul>
-     <li><b>Sequentially:</b> In the order it appears. Slow script files in <em>Greatly</em> slow down your page<br/>
-     (Page won't display anything if loading a script from head)</li>
-   <li>If you want non-blocking Javascript, load Asynchronously
-     <pre>
-      &lt;script id="myscript" type="text/javascript">
-      (function() {
-         var myscript = document.createElement('script');
-         myscript.type = 'text/javascript';
-         myscript.async = true;
-         myscript.src = 'http://mydomain/myscript.js'
-         var s = document.getElementById('myscript');
-         s.parentNode.insertBefore(myscript, s);
-      });
-      &lt;/script&gt;
-    </pre>
-    (Same way google does it, include at the bottom of the page for older browsers)
-   </li>
-    </ul>
-  </article>
-  
-  <article  class='full-code'>
-
-  <h2>Or, use a loader <a href='http://requirejs.org/docs/jquery.html'>require.js</a></h2>
-  <ul>
-    <li>index.html
-   <pre>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;jQuery+RequireJS Sample Page&lt;/title&gt;
-        &lt;script data-main="scripts/main" src="scripts/require-jquery.js"&gt;&lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;jQuery+RequireJS Sample Page&lt;/h1&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-  </pre> 
-      <li>scripts/main.js
-   <pre>
-require(["jquery", "jquery.alpha", "jquery.beta"], function($) {
-    $(function() {
-        $('body').alpha().beta();
-    });
-});
+<article class='slide  slide-list'>
+<h2>Facebook Javascript API Basics</h2>
+<p>Api Setup (After creating an application here: <a href='https://developers.facebook.com/apps'>https://developers.facebook.com/apps</a><p>
+<pre>
+&lt;div id="fb-root"&gt;&lt;/div&gt;
+&lt;script src="http://connect.facebook.net/en_US/all.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  FB.init({
+    appId  : 'YOUR APP ID',
+    status : true, // check login status
+    cookie : true, // enable cookies to allow the server to access the session
+    xfbml  : true, // parse XFBML
+    channelUrl : 'http://WWW.MYDOMAIN.COM/channel.html', // channel.html file
+    oauth  : true // enable OAuth 2.0
+  });
+&lt;/script&gt;
 </pre>
-      </li>
-    </ul>
+<p>
+	Channel.html file:</p>
+<pre>
+ &lt;script src="http://connect.facebook.net/en_US/all.js"&gt;&lt;/script&gt;
+</pre>
 
-  </article>
-
-
-  <article>
-    <h1>We're not really teaching programming today</h1>
-    <p>There's <b>way</b> too much to try to cover in a workshop</p>
-  </article>
-
-  <article>
-    <h1>We're talking jQuery</h1>
-    <p>And need just enough Javascript to get by.</p>
-  </article>
-
-  <article>
-    <h1>Just enough Javascript</h1>
-    <ul>
-      <li>How to execute javascript (already covered)</li>
-      <li>Hello World - calling functions.</li>
-      <li>Variables: a place for your data</li> 
-      <li>jQuery, getting it in your site.</li>
-      <li>Manipulating the DOM</li>
-    </ul>
-  </article>
+</article>
 
 
-	<article class='editor-slide' >
-	  <h2>Hello World</h2>
-    <p>Call the built-in 'alert' function and have it say "Hello World!"</p>
-    <div class='code-editor' data-language='js'></div>
+<article class='slide slide-list'>
+<h2>Show our name</h2>
+<p>Hide the login button when a user log's in, show a "Logging in", then the user's name once they are in.</p>
 
-    <script type='codedeck'>
-alert('Hello World!');
-    </script>
+<textarea class='coder-editor coder-editor-split' data-language='html'>
+&lt;link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.1.min.css"&gt;
+&lt;script src='http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js'&gt;END   
 
-    <div class='destination'></div>
-	</article>
+&lt;div id="fb-root"&gt;&lt;/div&gt;
+&lt;script src="http://connect.facebook.net/en_US/all.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  FB.init({
+    appId  : '186704188064658', status : true, cookie : true, xfbml  : true, channelUrl : 'channel.html', oauth  : true 
+  });
 
-	<article class='editor-slide' >
-	  <h2>Variables</h2>
-    <p>Variables are defined with <b>var</b> and are 'scoped' by functions. Interior functions have access to variables.</p>
-  	<div class='code-editor' data-language='js'>
-var linebreak =  "&lt;br/&gt;";
+var likeMaster = (function($,window) {
+  var self    =  {};
+  self.me      = null;
+  self.friends = null;
 
-var variableA = 'I am variable a';
-document.write("A:" + variableA + linebreak);
-
-function b() {
-  var variableB = 'I am variable b';
-  document.write("A:" + variableA + linebreak);
-  document.write("B:" + variableB + linebreak);
-}
-
-b();
-try {
-  document.write("B:" + variableB + linebreak);
-} catch(e) {
-  document.write("No variable B!");
-}
-      </div>
-    <div class='destination'>
-
-    </div>
-	</article>
-
-  <article class='editor-slide'>
-    <h2>Functions</h2>
-    <p>You can create your own functions and use existing functions. Functions are called with a <b>functionName()</b> and can be passed parameters</p>
-
-    <div class='code-editor' data-language='js'>
-// myFunction should return the value of a added to b 
-// and multiply the whole thing by 2
-function myFunction(a,b) {
-
-}      
-
-// Should be 60
-alert(myFunction(10,20));
-    </div>
-
-   <script type='codedeck'>
-// myFunction should return the value of a added to b 
-// and multiply the whole thing by 2
-function myFunction(a,b) {
-   return (a + b) * 2;
-}      
-
-// Should be 60
-alert(myFunction(10,20));
-    </script>
-
-    <div class='destination'></div>
-
-  </article>
+  self.login = function() {
+       FB.login(function(response) {
+    	   if (response.authResponse) {
+    	   	self.loggedIn();
+    	   }
+    	});
+  };
 
 
-	<article class='editor-slide' >
-	  <h2>Prompt it</h2>
-    <p>Try calling the <b>prompt</b> method instead of <b>alert</b>, and then calling <b>alert</b> on the returned value.</p>
-  	<div class='code-editor' data-language='js'>
-alert("Hello World!");
-    </div>
+  self.loggedIn = function() {
+     FB.api('/me', function(response) {
+        self.me = response;
+        FB.api('/me/friends', function(response) {
+           friends = response.data;
+           self.displayFriends();
+        });
+     });
+  };
 
-    <script type='codedeck'>
-var result = prompt('Give me some data');
-alert(result);
-    </script>
-
-    <div class='destination'>
-
-    </div>
-	</article>
+  self.displayFriends = function() {
 
 
-</section>
-	
+  }
+
+  return self;
+})(jQuery,window)
+ 
+parent.window.likeMaster = likeMaster;
+
+&lt;/script&gt;
+
+&lt;div style='text-align:center'&gt;
+&lt;h1&gt;Login to the LikeMaster&trade;&lt;/h1&gt;
+&lt;a href='javascript:void(0);' class='btn large primary' onclick='likeMaster.login();'&gt;Click Me to Login!&lt;/a&gt;
+&lt;/div&gt;
+
+</textarea>
+
+
+</article>
+
+
+<!-- Update these paths to point to the correct files. -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.tmpl.min.js"></script>
+<script src="js/deck.core.js"></script>
+
+<!-- Code Mirror -->
+<script src="js/codemirror/codemirror.js"></script>
+<link rel="stylesheet" href="js/codemirror/codemirror.css">
+<script src="js/codemirror/mode/javascript/javascript.js"></script>
+<link rel="stylesheet" href="js/codemirror/theme/default.css">
+
+
+<!-- Add any other extension JS files here -->
+<!-- Deck Core and extensions -->
+<script src="js/deck.status.js"></script>
+<script src="js/deck.navigation.js"></script>
+<script src='js/deck.coder.js'></script>
+<script src="js/deck.hash.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+	$(function() {
+		$.deck('.slide');
+	});
+</script>
 </body>
 </html>

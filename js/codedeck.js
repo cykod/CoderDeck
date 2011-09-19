@@ -11,7 +11,7 @@ function runCode(element) {
    $(destination).html("").append(iframe);
 
    var editor = $(element).data('editor');
-   var code = editor.getSession().getValue();
+   var code = editor.getValue();
 
    var language = $(element).attr('data-language');
 
@@ -34,8 +34,6 @@ function writeIFrame(iframe,code) {
 
 
 $(document).ready(function() {
-
-  var JavaScriptMode = require("ace/mode/javascript").Mode;
 
   $("a").attr('target','_blank');
 
@@ -74,13 +72,12 @@ $(document).ready(function() {
       if(!$(this).hasClass('codeEditor')) {
         var element = this;
         $(this).css('visibility','visible');
-        var editor = ace.edit(this.id);
+        var editor = CodeMirror.fromTextArea(this);
         $(this).addClass('codeEditor');
-        editor.getSession().setMode(new JavaScriptMode());
 
         if($(this).attr('data-script')) {
           var html = $("#" + $(this).attr('data-script')).html().replace(/SCRIPT/g,'<script>').replace(/END/,'</s' + 'cript>');
-          editor.getSession().setValue(html);
+          editor.setValue(html);
         }
 
         $(this).data('editor',editor);
@@ -94,7 +91,7 @@ $(document).ready(function() {
         if(solution) {
           $("<button>Solution</button>").insertBefore(this).click(function() {
               var html = $("#" + solution).html().replace(/SCRIPT/g,'<script>').replace(/END/,'</s' + 'cript>');
-          editor.getSession().setValue(html);
+          editor.setValue(html);
 
           });
         }
