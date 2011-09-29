@@ -43,7 +43,7 @@ that use the API provided by core.
 		$.deck.defaults.keys.myExtensionKeycode = 70; // 'h'
 		$d.bind('deck.init', function() {
 		   $d.bind('keydown.deck', function(event) {
-		      if (event.which == $.deck.getOptions().keys.myExtensionKeycode) {
+		      if (event.which === $.deck.getOptions().keys.myExtensionKeycode) {
 		         // Rock out
 		      }
 		   });
@@ -133,9 +133,21 @@ that use the API provided by core.
 		]);
 		*/	
 		init: function(elements, opts) {
+			var startTouch,
+			$c,
+			tolerance,
+			esp = function(e) {
+				e.stopPropagation();
+			};
+			
 			options = $.extend(true, {}, $[deck].defaults, opts);
 			slides = [];
 			current = 0;
+			$c = $[deck]('getContainer');
+			tolerance = options.touch.swipeTolerance;
+			
+			// Hide the deck while states are being applied to kill transitions
+			$c.addClass(options.classes.loading);
 			
 			// Fill slides array depending on parameter type
 			if ($.isArray(elements)) {
@@ -151,33 +163,70 @@ that use the API provided by core.
 			
 			/* Remove any previous bindings, and rebind key events */
 			$d.unbind('keydown.deck').bind('keydown.deck', function(e) {
-				switch (e.which) {
-					case options.keys.next:
-						methods.next();
-						e.preventDefault();
-						break;
-					case options.keys.previous:
-						methods.prev();
-						e.preventDefault();
-						break;
+				if (e.which === options.keys.next || $.inArray(e.which, options.keys.next) > -1) {
+					methods.next();
+					e.preventDefault();
+				}
+				else if (e.which === options.keys.previous || $.inArray(e.which, options.keys.previous) > -1) {
+					methods.prev();
+					e.preventDefault();
 				}
 			});
+			
+			/* Bind touch events for swiping between slides on touch devices */
+			$c.unbind('touchstart.deck').bind('touchstart.deck', function(e) {
+				if (!startTouch) {
+					startTouch = $.extend({}, e.originalEvent.targetTouches[0]);
+				}
+			})
+			.unbind('touchmove.deck').bind('touchmove.deck', function(e) {
+				$.each(e.originalEvent.changedTouches, function(i, t) {
+					if (startTouch && t.identifier === startTouch.identifier) {
+						if (t.screenX - startTouch.screenX > tolerance || t.screenY - startTouch.screenY > tolerance) {
+							$[deck]('prev');
+							startTouch = undefined;
+						}
+						else if (t.screenX - startTouch.screenX < -1 * tolerance || t.screenY - startTouch.screenY < -1 * tolerance) {
+							$[deck]('next');
+							startTouch = undefined;
+						}
+						return false;
+					}
+				});
+				e.preventDefault();
+			})
+			.unbind('touchend.deck').bind('touchend.deck', function(t) {
+				$.each(t.originalEvent.changedTouches, function(i, t) {
+					if (startTouch && t.identifier === startTouch.identifier) {
+						startTouch = undefined;
+					}
+				});
+			})
+			.scrollLeft(0).scrollTop(0)
+			/* Stop propagation of key events within editable elements of slides */
+			.undelegate('input, textarea, select, button, meter, progress, [contentEditable]', 'keydown', esp)
+			.delegate('input, textarea, select, button, meter, progress, [contentEditable]', 'keydown', esp);
 			
 			/*
 			Kick iframe videos, which dont like to redraw w/ transforms.
 			Remove this if Webkit ever fixes it.
 			 */
 			$.each(slides, function(i, $el) {
-				$el.unbind('webkitTransitionEnd').bind('webkitTransitionEnd',
+				$el.unbind('webkitTransitionEnd.deck').bind('webkitTransitionEnd.deck',
 				function(event) {
-					var embeds = $(this).find('iframe').css('opacity', 0);
-					window.setTimeout(function() {
-						embeds.css('opacity', 1);
-					}, 100);
+					if ($el.hasClass($[deck]('getOptions').classes.current)) {
+						var embeds = $(this).find('iframe').css('opacity', 0);
+						window.setTimeout(function() {
+							embeds.css('opacity', 1);
+						}, 100);
+					}
 				});
 			});
 			
 			updateStates();
+			
+			// Show deck again now that slides are in place
+			$c.removeClass(options.classes.loading);
 			$d.trigger(events.initialize);
 		},
 		
@@ -313,6 +362,14 @@ that use the API provided by core.
 	options.classes.current
 		This class is added to the current slide.
 		
+	options.classes.loading
+		This class is applied to the deck container during loading phases and is
+		primarily used as a way to short circuit transitions between states
+		where such transitions are distracting or unwanted.  For example, this
+		class is applied during deck initialization and then removed to prevent
+		all the slides from appearing stacked and transitioning into place
+		on load.
+		
 	options.classes.next
 		This class is added to the slide immediately following the 'current'
 		slide.
@@ -336,6 +393,10 @@ that use the API provided by core.
 		
 	options.keys.previous
 		The numeric keycode used to go to the previous slide.
+		
+	options.touch.swipeTolerance
+		The number of pixels the users finger must travel to produce a swipe
+		gesture.
 	*/
 	$[deck].defaults = {
 		classes: {
@@ -343,6 +404,7 @@ that use the API provided by core.
 			before: 'deck-before',
 			childCurrent: 'deck-child-current',
 			current: 'deck-current',
+			loading: 'deck-loading',
 			next: 'deck-next',
 			onPrefix: 'on-slide-',
 			previous: 'deck-previous'
@@ -353,12 +415,43 @@ that use the API provided by core.
 		},
 		
 		keys: {
-			next: 39, // right arrow key
-			previous: 37 // left arrow key
+			// enter, space, page down, right arrow, down arrow,
+			next: [13, 32, 34, 39, 40],
+			// backspace, page up, left arrow, up arrow
+			previous: [8, 33, 37, 38]
+		},
+		
+		touch: {
+			swipeTolerance: 60
 		}
 	};
 	
 	$d.ready(function() {
 		$('html').addClass('ready');
+	});
+	
+	/*
+	FF + Transforms + Flash video don't get along...
+	Firefox will reload and start playing certain videos after a
+	transform.  Blanking the src when a previously shown slide goes out
+	of view prevents this.
+	*/
+	$d.bind('deck.change', function(e, from, to) {
+		var oldFrames = $[deck]('getSlide', from).find('iframe'),
+		newFrames = $[deck]('getSlide', to).find('iframe');
+		
+		oldFrames.each(function() {
+			var $this = $(this);
+			$this.data('deck-src', $this.attr('src')).attr('src', '');
+		});
+		
+		newFrames.each(function() {
+			var $this = $(this),
+			originalSrc = $this.data('deck-src');
+			
+			if (originalSrc) {
+				$this.attr('src', originalSrc);
+			}
+		});
 	});
 })(jQuery, 'deck', document);

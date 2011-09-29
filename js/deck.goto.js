@@ -83,8 +83,10 @@ the deck container.
 	
 	$d.bind('deck.init', function() {
 		// Bind key events
-		$d.bind('keydown.deck', function(e) {
-			if (e.which == $[deck]('getOptions').keys.goto) {
+		$d.unbind('keydown.deckgoto').bind('keydown.deckgoto', function(e) {
+			var key = $[deck]('getOptions').keys.goto;
+			
+			if (e.which === key ||$.inArray(e.which, key) > -1) {
 				e.preventDefault();
 				$[deck]('toggleGoTo');
 			}
@@ -92,8 +94,8 @@ the deck container.
 		
 		// Process form submittal, go to the slide entered
 		$($[deck]('getOptions').selectors.gotoForm)
-		.unbind('submit.deck')
-		.bind('submit.deck', function(e) {
+		.unbind('submit.deckgoto')
+		.bind('submit.deckgoto', function(e) {
 			var $field = ($($[deck]('getOptions').selectors.gotoInput)),
 			i = parseInt($field.val(), 10);
 			
@@ -104,6 +106,12 @@ the deck container.
 			}
 			
 			e.preventDefault();
+		});
+		
+		$($[deck]('getOptions').selectors.gotoInput)
+		.unbind('keydown.deckgoto')
+		.bind('keydown.deckgoto', function(e) {
+			e.stopPropagation();
 		});
 	});
 })(jQuery, 'deck');

@@ -43,7 +43,7 @@ This module adds a code editor that shows up in individual slides
       code = "<scr" + "ipt>\n" + code + "\n</scr" + "ipt>";
     }
 
-    var tmpl = $("#coderdeck-default").html();
+    var tmpl = $(template ? "#" + template : "#coderdeck-default").html();
 
     code = "<!DOCTYPE HTML>" + tmpl.replace(/END/,'</s' + 'cript>').replace(/CODE/,code);
 
@@ -98,23 +98,6 @@ This module adds a code editor that shows up in individual slides
 
       });
 
-      
-      $d.unbind('keydown.deck').bind('keydown.deck', function(e) {
-        if(!editorFocused) {
-          switch (e.which) {
-            case $.deck.defaults.keys.next:
-            $.deck('next');
-            e.preventDefault();
-            break;
-            case $.deck.defaults.keys.previous:
-            $.deck('prev');
-            e.preventDefault();
-            break;
-          }
-        }
-      });
-
-
   });
 
 
@@ -129,66 +112,74 @@ This module adds a code editor that shows up in individual slides
 
         var html = element.html().replace(/SCRIPT/g,'<script>').replace(/END/,'</s' + 'cript>').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
 
+        if($(element).attr('data-save') && localStorage[$(element).attr('data-save')]) {
+         html = localStorage[$(element).attr('data-save')];
+       }
+
+        var isFull = $(element).data('full');
+        var isInstant = $(element).data('instant');
+
         $(element).css('visibility','visible');
 
         var editorOptions = { 
           lineNumbers: true,
           onFocus: function() { editorFocused = true; },
-          onBlur: function() { editorFocused = false; } 
+          onBlur: function() { editorFocused = false; },
+          mode: 'htmlmixed'
         };
 
-        if($(element).data('instant')) {
-          editorOptions['onChange'] =  function() { runCode(element); }
+        var dest = $(element).attr('data-target');
+        var destination = $("#" + dest );
+
+
+        if(isInstant) {
+          $(destination).show();
+          var changeTimer = null;
+          editorOptions['onChange'] =  function() { 
+            clearTimeout(changeTimer);
+
+            changeTimer = setTimeout(function() {
+              runCode(element,$(element).attr('data-coder-template'));
+            }, 50);
+          };
+             
         }
         var editor = CodeMirror.fromTextArea(element[0], editorOptions );
 
+        $(element).data('editor',editor);
+
 
         $(editor.getScrollerElement()).height($(current).height() - $(this).position().top - 80);
-
         $(this).addClass('coderEditor');
 
 
         var language = $(element).attr('data-language');
 
 
-        var isFull = $(element).data('full');
+        destination.height($(current).height() - $(this).position().top - 80);
+
 
         setTimeout(function() {
-          if($(element).attr('data-save') && localStorage[$(element).attr('data-save')]) {
-            editor.setValue(localStorage[$(element).attr('data-save')]);
-          } else {
-            editor.setValue(html);
-          }
-        },500);
+          editor.setValue(html);
 
-        $(element).data('editor',editor);
+        },100);
 
-        var dest = $(element).attr('data-target');
-        var destination = $("#" + dest );
+        if(!isInstant) {
+          $("<button>Run</button>").insertBefore(wrapper).click(function() {
+            if(isFull) {  
+              $(wrapper).hide();
+            }
+            $(destination).show();
+            runCode(element,$(element).attr('data-coder-template'));
 
-
-        destination.css('height',$(current).height() - $(this).position().top - 80);
-
-
-        $("<button>Run</button>").insertBefore(wrapper).click(function() {
-          if(isFull) {  
-            $(wrapper).hide();
-          }
-          $(destination).show();
-          runCode(element);
-
-        });
+          });
+        }
 
         if(isFull) { 
           $("<button>Back</button>").insertBefore(wrapper).click(function() {
             $(destination).toggle();
             $(wrapper).toggle();
           });
-        }
-
-
-        if($(element).data('instant')) {
-           runCode(element);
         }
 
         var solution = element.attr('data-solution');
