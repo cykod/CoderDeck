@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>HTML5 Workshop #6</title>
+	<title>CoderDeck Sample</title>
 	<meta name="viewport" content="width=1024">
 	
 	<!-- Replace path with correct path to deck.core.css. -->
@@ -18,15 +18,20 @@
 	<link rel="stylesheet" href="css/deck.hash.css">
 	<link rel="stylesheet" href="css/deck.coder.css">
 	
+
+	<link rel="stylesheet" href="src/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="src/codemirror/theme/default.css">
 	<!-- Replace path with correct path to Modernizr file. -->
-	<script src="js/modernizr.js"></script>
+
+	<script src='src/jquery.min.js'></script>
+	<script src="src/modernizr.js"></script>
 </head>
 <body class="deck-container">
 
 <script type='text/coderdeck' id='coderdeck-default'>
   <html>
     <head>
-      <script src='js/jquery.min.js'>END
+      <script src='src/jquery.min.js'>END
     </head>
     <body>
 	    CODE
@@ -35,106 +40,156 @@
 </script>
 
 
-<script type='text/coderdeck' id='coderdeck-style'>
-  <html>
-    <head>
-      <script src='js/jquery.min.js'>END
-    </head>
-    <body>
-	    This is a Test
-
-	    CODE
-    </body>
-</html>
-</script>
+<script type='text/coderdeck' id='coderdeck-style-example'>
+	<html>
+		<title>test</title>
+		<style>
+			CODE
+		</style>
+		<body>
+			<h1>I'm a H1 heading</h1>
+			<h2>I'm a H2 heading</h2>
+			<p>Pargraph of text &lt;p&gt; here</p>
+			<div class='stuff'>I'm a div &lt;div&gt; with class "stuff"</div>
+			<div id='my-div'>I'm a &lt;div&gt; with id "my-div"</div>
+		</body>
+	</html>
+</script> 	
 
 <article class='slide'>
 <h1>CoderDeck sample</h1>
 </article>
 
-<!-- Create any number of elements with class slide within the container -->
+<!-- Apply a class of "coder-editor" to a textarea to make it show up as runnable code -->
 <article class='slide slide-list'>
-<h2>Show our name</h2>
-<p>Hide the login button when a user log's in, show a "Logging in", then the user's name once they are in.</p>
+<h2>Basic Code Editor</h2>
+<p>Basic split code editor is created by adding a class of "coder-editor" to a textarea.
+   Press run, then modify some code and press "run" again</p>
 
-<textarea class='coder-editor coder-editor-split' data-language='html'>
-&lt;link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.1.min.css"&gt;
-&lt;script src='http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js'&gt;END   
+<textarea class='coder-editor'>
+<header>
+  <h1>My Site!</h1>
+  <nav><ul>
+    <li><a href='#'>Link 1</a></li>
+    <li><a href='#'>Link 2</a></li>
+  </ul></nav>
+</header>
 
-&lt;div id="fb-root"&gt;&lt;/div&gt;
-&lt;script src="http://connect.facebook.net/en_US/all.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  FB.init({
-    appId  : '186704188064658', status : true, cookie : true, xfbml  : true, channelUrl : 'channel.html', oauth  : true 
-  });
-
-var likeMaster = (function($,window) {
-  var self    =  {};
-  self.me      = null;
-  self.friends = null;
-
-  self.login = function() {
-       FB.login(function(response) {
-    	   if (response.authResponse) {
-    	   	self.loggedIn();
-    	   }
-    	});
-  };
-
-
-  self.loggedIn = function() {
-     FB.api('/me', function(response) {
-        self.me = response;
-        FB.api('/me/friends', function(response) {
-           friends = response.data;
-           self.displayFriends();
-        });
-     });
-  };
-
-  self.displayFriends = function() {
-
-
-  }
-
-  return self;
-})(jQuery,window)
- 
-parent.window.likeMaster = likeMaster;
-
-&lt;/script&gt;
-
-&lt;div style='text-align:center'&gt;
-&lt;h1&gt;Login to the LikeMaster&trade;&lt;/h1&gt;
-&lt;a href='javascript:void(0);' class='btn large primary' onclick='likeMaster.login();'&gt;Click Me to Login!&lt;/a&gt;
-&lt;/div&gt;
-
+<section id='content'>
+  <article class='blog-post'>
+    <h1>Blog Post 1</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+  </article>
+</section>
+<footer>
+  <a href='#'>Link 1</a> | <a href='#'>Link 2</a>
+</footer>	
 </textarea>
+</article>
 
+<!-- Apply a class of "coder-editor-full" along with "coder-editor" to a textarea to make it show up as runnable code -->
+<article class='slide slide-list'>
+<h2>Full Page Code Editor</h2>
+<p>Basic full page code editor is created by adding a class of "coder-editor-full" along with "coder-editor" to a textarea.
+   Press run, then press "back", then modify some code and press "run" again</p>
 
+<textarea class='coder-editor coder-editor-full'>
+<header>
+  <h1>My Site!</h1>
+  <nav><ul>
+    <li><a href='#'>Link 1</a></li>
+    <li><a href='#'>Link 2</a></li>
+  </ul></nav>
+</header>
+
+<section id='content'>
+  <article class='blog-post'>
+    <h1>Blog Post 1</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+  </article>
+</section>
+<footer>
+  <a href='#'>Link 1</a> | <a href='#'>Link 2</a>
+</footer>	
+</textarea>
 </article>
 
 
+<!-- add a "data-coder-template" to use a different template (see the template definitions at the top)
+     add a "data-language" to use a different CodeMirror2 mode other than htmlmixed. Options include "html", "javascript", "css", "xml" and any other mode supported by CodeMirror2
+-->
+<article class='slide slide-list'>
+<h2>Custom template and custom language</h2>
+<p>Basic full page code editor is created by adding a class of "coder-editor-full" along with "coder-editor" to a textarea.
+   Press run, then press "back", then modify some code and press "run" again</p>
+
+<textarea class='coder-editor' data-coder-template="coderdeck-style-example" data-language="css">
+h1 { color:blue; }
+h2 { color:red;}
+p  { color:pink;}
+.stuff  { color:purple;}
+#my-div { color:teal;}
+</textarea>
+</article>
+
+
+
+<!-- add a "data-coder-instant" to do on-the-fly updating-->
+<article class='slide slide-list'>
+<h2>Instant Update Sample</h2>
+<p>Try modifying any of the HTML on the left, the right side should updated periodically as you type. This is done by adding a class of "coder-editor-instant" to the textarea</p>
+
+<textarea class='coder-editor coder-editor-instant' data-coder-template="coderdeck-style-example" data-language="css">
+h1 { color:blue; }
+h2 { color:red;}
+p  { color:pink;}
+.stuff  { color:purple;}
+#my-div { color:teal;}
+</textarea>
+</article>
+
+
+<!-- Javascript works normally as well, libraries and external css (including jquery) can be included in template -->
+<article class='slide slide-list'>
+<h2>Javascript/jQuery Example</h2>
+<p>Try modifying any of the HTML on the left, the right side should updated periodically as you type. This is done by adding a class of "coder-editor-instant" to the textarea</p>
+
+<textarea class='coder-editor'>
+<script>
+
+</script>
+h1 { color:blue; }
+h2 { color:red;}
+p  { color:pink;}
+.stuff  { color:purple;}
+#my-div { color:teal;}
+</textarea>
+</article>
+
+
+
+
+
 <!-- Update these paths to point to the correct files. -->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.tmpl.min.js"></script>
-<script src="js/deck.core.js"></script>
+<script src="src/jquery.tmpl.min.js"></script>
+<script src="src/deck.js/core/deck.core.js"></script>
 
 <!-- Code Mirror -->
-<script src="js/codemirror/codemirror.js"></script>
-<link rel="stylesheet" href="js/codemirror/codemirror.css">
-<script src="js/codemirror/mode/javascript/javascript.js"></script>
-<link rel="stylesheet" href="js/codemirror/theme/default.css">
+<script src="src/codemirror/lib/codemirror.js"></script>
+<script src="src/codemirror/mode/xml/xml.js"></script>
+<script src="src/codemirror/mode/css/css.js"></script>
+<script src="src/codemirror/mode/javascript/javascript.js"></script>
+<script src="src/codemirror/mode/htmlmixed/htmlmixed.js"></script>
 
 
-<!-- Add any other extension JS files here -->
 <!-- Deck Core and extensions -->
-<script src="js/deck.status.js"></script>
-<script src="js/deck.navigation.js"></script>
-<script src='js/deck.coder.js'></script>
-<script src="js/deck.hash.js"></script>
+<script src="src/deck.js/extensions/status/deck.status.js"></script>
+<script src="src/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src='src/deck.coder.js'></script>
+<script src="src/deck.js/extensions/hash/deck.hash.js"></script>
 
-<!-- Initialize the deck. You can put this in an external file if desired. -->
 <script>
 	$(function() {
 		$.deck('.slide');
