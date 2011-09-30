@@ -4,32 +4,19 @@
 	<meta charset="utf-8">
 	<title>CoderDeck Sample</title>
 	<meta name="viewport" content="width=1024">
-	
-	<!-- Replace path with correct path to deck.core.css. -->
-	<link rel="stylesheet" href="css/deck.core.css" type="text/css">
-	<link rel="stylesheet" href="css/deck.navigation.css">
-	<link rel="stylesheet" href="css/deck.status.css">
-	<link rel="stylesheet" href="css/deck.hash.css">
-	<link rel="stylesheet" href="css/deck.menu.css">
-	<link rel="stylesheet" href="css/deck.coder.css">
-	
 
-	<link rel="stylesheet" href="src/codemirror/lib/codemirror.css">
-	<link rel="stylesheet" href="src/codemirror/theme/default.css">
-	<!-- Replace path with correct path to Modernizr file. -->
+        <link rel="stylesheet" href="dist/coderdeck-core.min.css" type="text/css">
+	<link rel="stylesheet" id='style-theme-link' href="dist/coderdeck.css" type="text/css" >
 
-
-	<link rel="stylesheet" id='style-theme-link' href="css/coderdeck.css" type="text/css" >
-
-	<script src='src/jquery.min.js'></script>
-	<script src="src/modernizr.js"></script>
+	<script src='dist/jquery.min.js'></script>
+	<script src="dist/modernizr.js"></script>
 </head>
 <body class="deck-container">
 
 <script type='text/coderdeck' id='coderdeck-default'>
   <html>
     <head>
-      <script src='src/jquery.min.js'>SCRIPTEND
+      <script src='dist/jquery.min.js'>SCRIPTEND
     </head>
     <body>
 	    CODE
@@ -54,8 +41,9 @@
 	</html>
 </script> 	
 
-<article class='slide'>
+<article class='slide slide-subhead'>
 <h1>CoderDeck sample</h1>
+<h2>Run "make" to build the dist directory</h2>
 </article>
 
 <!-- Apply a class of "coder-editor" to a textarea to make it show up as runnable code -->

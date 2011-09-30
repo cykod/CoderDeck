@@ -22,11 +22,24 @@ BASE_FILES = ${SRC_DIR}/jquery.tmpl.min.js\
 	${SRC_DIR}/deck.js/extensions/hash/deck.hash.js\
 	${SRC_DIR}/deck.js/extensions/menu/deck.menu.js
 
+CSS_FILES = ${SRC_DIR}/deck.js/core/deck.core.css\
+	${SRC_DIR}/deck.js/core/deck.core.css\
+	${SRC_DIR}/deck.js/extensions/navigation/deck.navigation.css\
+	${SRC_DIR}/deck.js/extensions/status/deck.status.css\
+	${SRC_DIR}/deck.js/extensions/hash/deck.hash.css\
+	${SRC_DIR}/deck.js/extensions/menu/deck.menu.css\
+	${SRC_DIR}/css/deck.coder.css\
+	${SRC_DIR}/codemirror/lib/codemirror.css\
+	${SRC_DIR}/codemirror/theme/default.css
+
+
 MODULES = ${SRC_DIR}/intro.js\
 	${BASE_FILES}
 
 CODERDECK= ${DIST_DIR}/coderdeck.js
 CODERDECK_MIN = ${DIST_DIR}/coderdeck.min.js
+
+CSS_MIN = ${DIST_DIR}/coderdeck-core.min.css
 
 CODERDECK_VER = $(shell cat version.txt)
 VER = sed "s/@VERSION/${CODERDECK_VER}/"
@@ -35,13 +48,22 @@ DATE=$(shell git log -1 --pretty=format:%ad)
 
 all: update_submodules core
 
-core: coderdeck min
+core: coderdeck css jquery min
 	@@echo "Coderdeck build complete."
 
 ${DIST_DIR}:
 	@@mkdir -p ${DIST_DIR}
 
 coderdeck: ${CODERDECK}
+
+css:
+	cat ${CSS_FILES} > ${CSS_MIN}
+	cp ${SRC_DIR}/css/coderdeck.css ${DIST_DIR}/
+
+jquery:
+	cp ${SRC_DIR}/jquery.min.js ${DIST_DIR}/
+	cp ${SRC_DIR}/modernizr.js ${DIST_DIR}/
+
 
 ${CODERDECK}: ${MODULES} | ${DIST_DIR}
 	@@echo "Building" ${CODERDECK}
