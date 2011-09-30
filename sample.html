@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>HTML5 Workshop #6</title>
+	<title>CoderDeck Sample</title>
 	<meta name="viewport" content="width=1024">
 	
 	<!-- Replace path with correct path to deck.core.css. -->
@@ -16,17 +16,23 @@
 	<link rel="stylesheet" href="css/deck.navigation.css">
 	<link rel="stylesheet" href="css/deck.status.css">
 	<link rel="stylesheet" href="css/deck.hash.css">
+	<link rel="stylesheet" href="css/deck.menu.css">
 	<link rel="stylesheet" href="css/deck.coder.css">
 	
+
+	<link rel="stylesheet" href="src/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="src/codemirror/theme/default.css">
 	<!-- Replace path with correct path to Modernizr file. -->
-	<script src="js/modernizr.js"></script>
+
+	<script src='src/jquery.min.js'></script>
+	<script src="src/modernizr.js"></script>
 </head>
 <body class="deck-container">
 
 <script type='text/coderdeck' id='coderdeck-default'>
   <html>
     <head>
-      <script src='js/jquery.min.js'>END
+      <script src='src/jquery.min.js'>SCRIPTEND
     </head>
     <body>
 	    CODE
@@ -34,149 +40,197 @@
 </html>
 </script>
 
-<!-- Create any number of elements with class slide within the container -->
-<article class='slide slide-subhead'>
-<h1>HTML5 Workshop #6</h1>
-<h2>Putting it all together<br/>
- <a href='http://bit.ly/html5workshop6'>http://bit.ly/html5workshop6</a></h2>
+
+<script type='text/coderdeck' id='coderdeck-style-example'>
+	<html>
+		<title>test</title>
+		<style>
+			CODE
+		</style>
+		<body>
+			<h1>I'm a H1 heading</h1>
+			<h2>I'm a H2 heading</h2>
+			<p>Pargraph of text &lt;p&gt; here</p>
+			<div class='stuff'>I'm a div &lt;div&gt; with class "stuff"</div>
+			<div id='my-div'>I'm a &lt;div&gt; with id "my-div"</div>
+		</body>
+	</html>
+</script> 	
+
+<article class='slide'>
+<h1>CoderDeck sample</h1>
 </article>
-	
+
+<!-- Apply a class of "coder-editor" to a textarea to make it show up as runnable code -->
 <article class='slide slide-list'>
-<h2>What we've learned</h2>
-<ol>
-	<li class='slide'><h3>HTML5 Basics &amp; Semantic Structure</h3></li>
-	<li class='slide'><h3>The Perfect Chop &amp; Layout basics</h3></li>
-	<li class='slide'><h3>CSS styling &amp; Responsive Design</h3></li>
-	<li class='slide'><h3>Javascript & jQuery</h3></li>
-	<li class='slide'><h3>More Javascript, Events, Ajax &amp; JS Templates</h3></li>
-</ol>
+<h2>Basic Code Editor</h2>
+<p>Basic split code editor is created by adding a class of "coder-editor" to a textarea.
+   Press run, then modify some code and press "run" again</p>
+
+<textarea class='coder-editor'>
+<header>
+  <h1>My Site!</h1>
+  <nav><ul>
+    <li><a href='#'>Link 1</a></li>
+    <li><a href='#'>Link 2</a></li>
+  </ul></nav>
+</header>
+
+<section id='content'>
+  <article class='blog-post'>
+    <h1>Blog Post 1</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+  </article>
+</section>
+<footer>
+  <a href='#'>Link 1</a> | <a href='#'>Link 2</a>
+</footer>	
+</textarea>
 </article>
 
-<article class='slide slide-subhead'>
-<h1>Mashup Time</h1>
-<h2>Friend Explorer with Facebook API</h2>
-</article>
-
+<!-- Apply a class of "coder-editor-full" along with "coder-editor" to a textarea to make it show up as runnable code -->
 <article class='slide slide-list'>
-<h2>The Plan</h2>
-<ol>
-	<li class='slide' ><h3>Connect to facebook API</h3></li>
-	<li class='slide' ><h3>Pull a list of your friends</h3></li>
-	<li class='slide' ><h3>Find a list of all the things your friends like.</h3></li>
-</ol>
+<h2>Full Page Code Editor</h2>
+<p>Basic full page code editor is created by adding a class of "coder-editor-full" along with "coder-editor" to a textarea.
+   Press run, then press "back", then modify some code and press "run" again</p>
 
+<textarea class='coder-editor coder-editor-full'>
+<header>
+  <h1>My Site!</h1>
+  <nav><ul>
+    <li><a href='#'>Link 1</a></li>
+    <li><a href='#'>Link 2</a></li>
+  </ul></nav>
+</header>
+
+<section id='content'>
+  <article class='blog-post'>
+    <h1>Blog Post 1</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+  </article>
+</section>
+<footer>
+  <a href='#'>Link 1</a> | <a href='#'>Link 2</a>
+</footer>	
+</textarea>
+</article>
+
+
+<!-- add a "data-coder-template" to use a different template (see the template definitions at the top)
+     add a "data-language" to use a different CodeMirror2 mode other than htmlmixed. Options include "html", "javascript", "css", "xml" and any other mode supported by CodeMirror2
+-->
+<article class='slide slide-list'>
+<h2>Custom template and custom language</h2>
+<p>Basic full page code editor is created by adding a class of "coder-editor-full" along with "coder-editor" to a textarea.
+   Press run, then press "back", then modify some code and press "run" again</p>
+
+<textarea class='coder-editor' data-coder-template="coderdeck-style-example" data-language="css">
+h1 { color:blue; }
+h2 { color:red;}
+p  { color:pink;}
+.stuff  { color:purple;}
+#my-div { color:teal;}
+</textarea>
 </article>
 
 
 
-<article class='slide  slide-list'>
-<h2>Facebook Javascript API Basics</h2>
-<p>Api Setup (After creating an application here: <a href='https://developers.facebook.com/apps'>https://developers.facebook.com/apps</a><p>
-<pre>
-&lt;div id="fb-root"&gt;&lt;/div&gt;
-&lt;script src="http://connect.facebook.net/en_US/all.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  FB.init({
-    appId  : 'YOUR APP ID',
-    status : true, // check login status
-    cookie : true, // enable cookies to allow the server to access the session
-    xfbml  : true, // parse XFBML
-    channelUrl : 'http://WWW.MYDOMAIN.COM/channel.html', // channel.html file
-    oauth  : true // enable OAuth 2.0
+<!-- add a "data-coder-instant" to do on-the-fly updating-->
+<article class='slide slide-list'>
+<h2>Instant Update Sample</h2>
+<p>Try modifying any of the HTML on the left, the right side should updated periodically as you type. This is done by adding a class of "coder-editor-instant" to the textarea</p>
+
+<textarea class='coder-editor coder-editor-instant' data-coder-template="coderdeck-style-example" data-language="css">
+h1 { color:blue; }
+h2 { color:red;}
+p  { color:pink;}
+.stuff  { color:purple;}
+#my-div { color:teal;}
+</textarea>
+</article>
+
+
+<!-- Javascript works normally as well, libraries and external css (including jquery) can be included in template -->
+<article class='slide slide-list'>
+<h2>Javascript/jQuery Example</h2>
+<p> Javascript works normally as well, libraries and external css (including jquery) can be included in the coderdeck template.</p>
+<textarea class='coder-editor'>
+<script>
+  $(function() {
+    $(".box").animate({ 
+        'top':"50%", 
+        'left':"50%" });
   });
-&lt;/script&gt;
-</pre>
-<p>
-	Channel.html file:</p>
-<pre>
- &lt;script src="http://connect.facebook.net/en_US/all.js"&gt;&lt;/script&gt;
-</pre>
-
-</article>
-
-
-<article class='slide slide-list'>
-<h2>Show our name</h2>
-<p>Hide the login button when a user log's in, show a "Logging in", then the user's name once they are in.</p>
-
-<textarea class='coder-editor coder-editor-split' data-language='html'>
-&lt;link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.1.min.css"&gt;
-&lt;script src='http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js'&gt;END   
-
-&lt;div id="fb-root"&gt;&lt;/div&gt;
-&lt;script src="http://connect.facebook.net/en_US/all.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  FB.init({
-    appId  : '186704188064658', status : true, cookie : true, xfbml  : true, channelUrl : 'channel.html', oauth  : true 
-  });
-
-var likeMaster = (function($,window) {
-  var self    =  {};
-  self.me      = null;
-  self.friends = null;
-
-  self.login = function() {
-       FB.login(function(response) {
-    	   if (response.authResponse) {
-    	   	self.loggedIn();
-    	   }
-    	});
-  };
-
-
-  self.loggedIn = function() {
-     FB.api('/me', function(response) {
-        self.me = response;
-        FB.api('/me/friends', function(response) {
-           friends = response.data;
-           self.displayFriends();
-        });
-     });
-  };
-
-  self.displayFriends = function() {
-
-
+</script>
+<style>
+  .box { 
+    top:0px; left:0px;
+    width:50px; height:50px; 
+    position:absolute; 
+    background-color:red;
   }
+</style>
+<div class='box'></div>
+</textarea>
+</article>
 
-  return self;
-})(jQuery,window)
- 
-parent.window.likeMaster = likeMaster;
 
-&lt;/script&gt;
 
-&lt;div style='text-align:center'&gt;
-&lt;h1&gt;Login to the LikeMaster&trade;&lt;/h1&gt;
-&lt;a href='javascript:void(0);' class='btn large primary' onclick='likeMaster.login();'&gt;Click Me to Login!&lt;/a&gt;
-&lt;/div&gt;
+<article class='slide slide-list'>
+<h2>Local Storage</h2>
+<p>  If you want your changes to a slide to survive between page reloads you can define a data-save attribute which will save it to the attributes value in localstorage. Make a code change, hit run/save and reload this slide.</p>
+<p> You can also use the same 'data-save'  attribute on mulitiple slides to keep the same code moving forwad</p>
+<textarea class='coder-editor' data-save='dummy'>
+  <h1>This is some dummy content..</h1>
+</textarea>
+</article>
 
+
+<article class='slide slide-list'>
+<h2>Solutions</h2>
+<p>If you want to add a solution to an exercise, you can add a coderdeck-solution script tag in the slide </p>
+<textarea class='coder-editor'>
+
+<script>
+    // Display an alert message
+    // if a confirm dialog returns true
+</script>
 </textarea>
 
-
+<script type='coder-solution'>
+SCRIPT
+  if(confirm("Do you want an alert?")) {
+      alert("Yay!");
+  }
+SCRIPTEND
+</script>
 </article>
+
+
+
 
 
 <!-- Update these paths to point to the correct files. -->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.tmpl.min.js"></script>
-<script src="js/deck.core.js"></script>
+<script src="src/jquery.tmpl.min.js"></script>
+<script src="src/deck.js/core/deck.core.js"></script>
 
 <!-- Code Mirror -->
-<script src="js/codemirror/codemirror.js"></script>
-<link rel="stylesheet" href="js/codemirror/codemirror.css">
-<script src="js/codemirror/mode/javascript/javascript.js"></script>
-<link rel="stylesheet" href="js/codemirror/theme/default.css">
+<script src="src/codemirror/lib/codemirror.js"></script>
+<script src="src/codemirror/mode/xml/xml.js"></script>
+<script src="src/codemirror/mode/css/css.js"></script>
+<script src="src/codemirror/mode/javascript/javascript.js"></script>
+<script src="src/codemirror/mode/htmlmixed/htmlmixed.js"></script>
 
 
-<!-- Add any other extension JS files here -->
 <!-- Deck Core and extensions -->
-<script src="js/deck.status.js"></script>
-<script src="js/deck.navigation.js"></script>
-<script src='js/deck.coder.js'></script>
-<script src="js/deck.hash.js"></script>
+<script src="src/deck.js/extensions/status/deck.status.js"></script>
+<script src="src/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src='src/deck.coder.js'></script>
+<script src="src/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="src/deck.js/extensions/menu/deck.menu.js"></script>
 
-<!-- Initialize the deck. You can put this in an external file if desired. -->
 <script>
 	$(function() {
 		$.deck('.slide');

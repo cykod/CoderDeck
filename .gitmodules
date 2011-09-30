@@ -1,0 +1,6 @@
+[submodule "src/deck.js"]
+	path = src/deck.js
+	url = https://github.com/imakewebthings/deck.js.git
+[submodule "src/codemirror"]
+	path = src/codemirror
+	url = https://github.com/marijnh/CodeMirror2.git
