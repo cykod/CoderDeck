@@ -37,12 +37,20 @@
   .deck-container .slide-subhead h1 {
     font-size: 5em;
     position: static;
-    margin-top: 2em;
-    margin-bottom: 0em; }
+    margin: 0px;
+    padding-top: 2em;
+    padding-bottom: 0.5em;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -transform: none;
+    -o-transform: none; }
   .deck-container .slide-subhead h2 {
     font-size: 2em;
     text-align: center;
-    margin-top: .1em; }
+    margin: 0px;
+    padding: 0px;
+    padding-top: .1em; }
   .deck-container h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;

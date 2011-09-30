@@ -46,8 +46,14 @@ $complimentary-color:#d3502c;
 	}
 	
 	.slide-subhead { 
-		h1 { font-size:5em; position:static; margin-top:2em; margin-bottom:0em;}
-		h2 { font-size:2em; text-align:center; margin-top:.1em;}
+		h1 { font-size:5em; position:static; margin:0px; padding-top:2em; padding-bottom:0.5em; 
+      -webkit-transform:none;
+      -moz-transform:none;
+      -ms-transform:none;
+      -transform:none;
+      -o-transform:none;
+    }
+		h2 { font-size:2em; text-align:center; margin:0px; padding:0px; padding-top:.1em; }
 	}
 	
 	h1 {
