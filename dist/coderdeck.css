@@ -35,7 +35,10 @@
     font-size: .9em;
     color: #444444; }
   .deck-container .slide-subhead h1 {
-    font-size: 5em; }
+    font-size: 5em;
+    position: static;
+    margin-top: 2em;
+    margin-bottom: 0em; }
   .deck-container .slide-subhead h2 {
     font-size: 2em;
     text-align: center;
