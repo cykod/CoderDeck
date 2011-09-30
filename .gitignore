@@ -1,2 +1,3 @@
 dist
 build/*.json
+.sass-cache
