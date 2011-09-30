@@ -15,7 +15,11 @@ This module adds a code editor that shows up in individual slides
   $window = $(window);
 
   function unsanitize(str) {
-   return str.replace(/SCRIPTEND/,'</s' + 'cript>').replace(/SCRIPT/g,'<script>').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+   return addScript(str).replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+  }
+
+  function addScript(str) {
+   return str.replace(/SCRIPTEND/,'</s' + 'cript>').replace(/SCRIPT/g,'<script>')
   }
 
   function runCode(element,template) {
@@ -39,7 +43,7 @@ This module adds a code editor that shows up in individual slides
 
     var tmpl = $(template ? "#" + template : "#coderdeck-default").html();
 
-    code = "<!DOCTYPE HTML>" + unsanitize(tmpl).replace(/CODE/,code);
+    code = "<!DOCTYPE HTML>" + addScript(tmpl).replace(/CODE/,code);
 
     writeIFrame(iframe,code);
   }
