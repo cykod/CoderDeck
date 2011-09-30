@@ -9,88 +9,55 @@ JS_ENGINE ?= `which node nodejs`
 COMPILER = ${JS_ENGINE} ${BUILD_DIR}/uglify.js --unsafe
 POST_COMPILER = ${JS_ENGINE} ${BUILD_DIR}/post-compile.js
 
-BASE_FILES = ${SRC_DIR}/jquery.js\
-	${SRC_DIR}/callbacks.js\
-	${SRC_DIR}/deferred.js\
-	${SRC_DIR}/support.js\
-	${SRC_DIR}/data.js\
-	${SRC_DIR}/queue.js\
-	${SRC_DIR}/attributes.js\
-	${SRC_DIR}/event.js\
-	${SRC_DIR}/selector.js\
-	${SRC_DIR}/traversing.js\
-	${SRC_DIR}/manipulation.js\
-	${SRC_DIR}/css.js\
-	${SRC_DIR}/ajax.js\
-	${SRC_DIR}/ajax/jsonp.js\
-	${SRC_DIR}/ajax/script.js\
-	${SRC_DIR}/ajax/xhr.js\
-	${SRC_DIR}/effects.js\
-	${SRC_DIR}/offset.js\
-	${SRC_DIR}/dimensions.js
+BASE_FILES = ${SRC_DIR}/jquery.tmpl.min.js\
+	${SRC_DIR}/deck.js/core/deck.core.js\
+	${SRC_DIR}/codemirror/lib/codemirror.js\
+	${SRC_DIR}/codemirror/mode/xml/xml.js\
+	${SRC_DIR}/codemirror/mode/css/css.js\
+	${SRC_DIR}/codemirror/mode/javascript/javascript.js\
+	${SRC_DIR}/codemirror/mode/htmlmixed/htmlmixed.js\
+	${SRC_DIR}/deck.js/extensions/status/deck.status.js\
+	${SRC_DIR}/deck.js/extensions/navigation/deck.navigation.js\
+	${SRC_DIR}/deck.coder.js\
+	${SRC_DIR}/deck.js/extensions/hash/deck.hash.js\
+	${SRC_DIR}/deck.js/extensions/menu/deck.menu.js
 
 MODULES = ${SRC_DIR}/intro.js\
-	${BASE_FILES}\
-	${SRC_DIR}/outro.js
+	${BASE_FILES}
 
-JQ = ${DIST_DIR}/jquery.js
-JQ_MIN = ${DIST_DIR}/jquery.min.js
+CODERDECK= ${DIST_DIR}/coderdeck.js
+CODERDECK_MIN = ${DIST_DIR}/coderdeck.min.js
 
-SIZZLE_DIR = ${SRC_DIR}/sizzle
-
-JQ_VER = $(shell cat version.txt)
-VER = sed "s/@VERSION/${JQ_VER}/"
+CODERDECK_VER = $(shell cat version.txt)
+VER = sed "s/@VERSION/${CODERDECK_VER}/"
 
 DATE=$(shell git log -1 --pretty=format:%ad)
 
 all: update_submodules core
 
-core: jquery min lint size
-	@@echo "jQuery build complete."
+core: coderdeck min
+	@@echo "Coderdeck build complete."
 
 ${DIST_DIR}:
 	@@mkdir -p ${DIST_DIR}
 
-jquery: ${JQ}
+coderdeck: ${CODERDECK}
 
-${JQ}: ${MODULES} | ${DIST_DIR}
-	@@echo "Building" ${JQ}
+${CODERDECK}: ${MODULES} | ${DIST_DIR}
+	@@echo "Building" ${CODERDECK}
 
 	@@cat ${MODULES} | \
-		sed 's/.function..jQuery...{//' | \
-		sed 's/}...jQuery..;//' | \
 		sed 's/@DATE/'"${DATE}"'/' | \
-		${VER} > ${JQ};
+		${VER} > ${CODERDECK};
 
-${SRC_DIR}/selector.js: ${SIZZLE_DIR}/sizzle.js
-	@@echo "Building selector code from Sizzle"
-	@@sed '/EXPOSE/r src/sizzle-jquery.js' ${SIZZLE_DIR}/sizzle.js | grep -v window.Sizzle > ${SRC_DIR}/selector.js
+min: coderdeck ${CODERDECK_MIN}
 
-lint: jquery
+${CODERDECK_MIN}: ${CODERDECK}
 	@@if test ! -z ${JS_ENGINE}; then \
-		echo "Checking jQuery against JSLint..."; \
-		${JS_ENGINE} build/jslint-check.js; \
-	else \
-		echo "You must have NodeJS installed in order to test jQuery against JSLint."; \
-	fi
-
-size: jquery min
-	@@if test ! -z ${JS_ENGINE}; then \
-		gzip -c ${JQ_MIN} > ${JQ_MIN}.gz; \
-		wc -c ${JQ} ${JQ_MIN} ${JQ_MIN}.gz | ${JS_ENGINE} ${BUILD_DIR}/sizer.js; \
-		rm ${JQ_MIN}.gz; \
-	else \
-		echo "You must have NodeJS installed in order to size jQuery."; \
-	fi
-
-min: jquery ${JQ_MIN}
-
-${JQ_MIN}: ${JQ}
-	@@if test ! -z ${JS_ENGINE}; then \
-		echo "Minifying jQuery" ${JQ_MIN}; \
-		${COMPILER} ${JQ} > ${JQ_MIN}.tmp; \
-		${POST_COMPILER} ${JQ_MIN}.tmp > ${JQ_MIN}; \
-		rm -f ${JQ_MIN}.tmp; \
+		echo "Minifying CoderDeck" ${CODERDECK_MIN}; \
+		${COMPILER} ${CODERDECK} > ${CODERDECK_MIN}.tmp; \
+		${POST_COMPILER} ${CODERDECK_MIN}.tmp > ${CODERDECK_MIN}; \
+		rm -f ${CODERDECK_MIN}.tmp; \
 	else \
 		echo "You must have NodeJS installed in order to minify jQuery."; \
 	fi
@@ -99,12 +66,8 @@ clean:
 	@@echo "Removing Distribution directory:" ${DIST_DIR}
 	@@rm -rf ${DIST_DIR}
 
-	@@echo "Removing built copy of Sizzle"
-	@@rm -f src/selector.js
-
 distclean: clean
 	@@echo "Removing submodules"
-	@@rm -rf test/qunit src/sizzle
 
 # change pointers for submodules and update them to what is specified in jQuery
 # --merge  doesn't work when doing an initial clone, thus test if we have non-existing

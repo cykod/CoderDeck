@@ -1,13 +1,11 @@
 /*!
- *Copyright (c) 2011 Cykod LLC
+ Copyright (c) 2011 Cykod LLC
  Dual licensed under the MIT license and the GPL license
-
 */
 
 
 /*
 This module adds a code editor that shows up in individual slides
-
 */
 
 
@@ -138,7 +136,6 @@ This module adds a code editor that shows up in individual slides
 
     var editor = $element.data("editor");
     var height = $(currentSlide).height() - $container.position().top - 80;
-    alert(height);
     $(editor.getScrollerElement()).height(height);
     $destination.height(height);
   }
@@ -201,6 +198,7 @@ This module adds a code editor that shows up in individual slides
         generateCodeSlide($container,current);
       }
       resizeEditors(current,$container);
+    });
   });
 
 })(jQuery,'deck',this);

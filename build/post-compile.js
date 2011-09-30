@@ -5,7 +5,7 @@ var print = require( "sys" ).print,
 	src = fs.readFileSync( process.argv[2], "utf8" ),
 	version = fs.readFileSync( "version.txt", "utf8" ),
 	// License Template
-	license = "/*! CoderDeck @VERSION http://coderdeck.com/ | http://coderdeck.com/license */";
+	license = fs.readFileSync("src/intro.js","utf8");
 
 
 // Previously done in sed but reimplemented here due to portability issues

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CoderDeck Sample</title>
+	<meta name="viewport" content="width=1024">
+	
+	<!-- Replace path with correct path to deck.core.css. -->
+	<link rel="stylesheet" href="css/deck.core.css" type="text/css">
+	<link rel="stylesheet" href="css/deck.navigation.css">
+	<link rel="stylesheet" href="css/deck.status.css">
+	<link rel="stylesheet" href="css/deck.hash.css">
+	<link rel="stylesheet" href="css/deck.menu.css">
+	<link rel="stylesheet" href="css/deck.coder.css">
+	
+
+	<link rel="stylesheet" href="src/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="src/codemirror/theme/default.css">
+	<!-- Replace path with correct path to Modernizr file. -->
+
+
+	<link rel="stylesheet" id='style-theme-link' href="css/coderdeck.css" type="text/css" >
+
+	<script src='src/jquery.min.js'></script>
+	<script src="src/modernizr.js"></script>
+</head>
+<body class="deck-container">
+
+<script type='text/coderdeck' id='coderdeck-default'>
+  <html>
+    <head>
+      <script src='src/jquery.min.js'>SCRIPTEND
+    </head>
+    <body>
+	    CODE
+    </body>
+</html>
+</script>
+
+
+<script type='text/coderdeck' id='coderdeck-style-example'>
+	<html>
+		<title>test</title>
+		<style>
+			CODE
+		</style>
+		<body>
+			<h1>I'm a H1 heading</h1>
+			<h2>I'm a H2 heading</h2>
+			<p>Pargraph of text &lt;p&gt; here</p>
+			<div class='stuff'>I'm a div &lt;div&gt; with class "stuff"</div>
+			<div id='my-div'>I'm a &lt;div&gt; with id "my-div"</div>
+		</body>
+	</html>
+</script> 	
+
+<article class='slide'>
+<h1>CoderDeck sample</h1>
+</article>
+
+<!-- Apply a class of "coder-editor" to a textarea to make it show up as runnable code -->
+<article class='slide slide-list'>
+<h2>Basic Code Editor</h2>
+<p>Basic split code editor is created by adding a class of "coder-editor" to a textarea.
+   Press run, then modify some code and press "run" again</p>
+
+<textarea class='coder-editor'>
+<header>
+  <h1>My Site!</h1>
+  <nav><ul>
+    <li><a href='#'>Link 1</a></li>
+    <li><a href='#'>Link 2</a></li>
+  </ul></nav>
+</header>
+
+<section id='content'>
+  <article class='blog-post'>
+    <h1>Blog Post 1</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+  </article>
+</section>
+<footer>
+  <a href='#'>Link 1</a> | <a href='#'>Link 2</a>
+</footer>	
+</textarea>
+</article>
+
+<!-- Apply a class of "coder-editor-full" along with "coder-editor" to a textarea to make it show up as runnable code -->
+<article class='slide slide-list'>
+<h2>Full Page Code Editor</h2>
+<p>Basic full page code editor is created by adding a class of "coder-editor-full" along with "coder-editor" to a textarea.
+   Press run, then press "back", then modify some code and press "run" again</p>
+
+<textarea class='coder-editor coder-editor-full'>
+<header>
+  <h1>My Site!</h1>
+  <nav><ul>
+    <li><a href='#'>Link 1</a></li>
+    <li><a href='#'>Link 2</a></li>
+  </ul></nav>
+</header>
+
+<section id='content'>
+  <article class='blog-post'>
+    <h1>Blog Post 1</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac elit at nisl sagittis consequat sed eget tellus. Aliquam gravida, nunc sit amet viverra dictum, nibh justo semper massa</p>
+  </article>
+</section>
+<footer>
+  <a href='#'>Link 1</a> | <a href='#'>Link 2</a>
+</footer>	
+</textarea>
+</article>
+
+
+<!-- add a "data-coder-template" to use a different template (see the template definitions at the top)
+     add a "data-language" to use a different CodeMirror2 mode other than htmlmixed. Options include "html", "javascript", "css", "xml" and any other mode supported by CodeMirror2
+-->
+<article class='slide slide-list'>
+<h2>Custom template and custom language</h2>
+<p>Basic full page code editor is created by adding a class of "coder-editor-full" along with "coder-editor" to a textarea.
+   Press run, then press "back", then modify some code and press "run" again</p>
+
+<textarea class='coder-editor' data-coder-template="coderdeck-style-example" data-language="css">
+h1 { color:blue; }
+h2 { color:red;}
+p  { color:pink;}
+.stuff  { color:purple;}
+#my-div { color:teal;}
+</textarea>
+</article>
+
+
+
+<!-- add a "data-coder-instant" to do on-the-fly updating-->
+<article class='slide slide-list'>
+<h2>Instant Update Sample</h2>
+<p>Try modifying any of the HTML on the left, the right side should updated periodically as you type. This is done by adding a class of "coder-editor-instant" to the textarea</p>
+
+<textarea class='coder-editor coder-editor-instant' data-coder-template="coderdeck-style-example" data-language="css">
+h1 { color:blue; }
+h2 { color:red;}
+p  { color:pink;}
+.stuff  { color:purple;}
+#my-div { color:teal;}
+</textarea>
+</article>
+
+
+<!-- Javascript works normally as well, libraries and external css (including jquery) can be included in template -->
+<article class='slide slide-list'>
+<h2>Javascript/jQuery Example</h2>
+<p> Javascript works normally as well, libraries and external css (including jquery) can be included in the coderdeck template.</p>
+<textarea class='coder-editor'>
+<script>
+  $(function() {
+    $(".box").animate({ 
+        'top':"50%", 
+        'left':"50%" });
+  });
+</script>
+<style>
+  .box { 
+    top:0px; left:0px;
+    width:50px; height:50px; 
+    position:absolute; 
+    background-color:red;
+  }
+</style>
+<div class='box'></div>
+</textarea>
+</article>
+
+
+
+<article class='slide slide-list'>
+<h2>Local Storage</h2>
+<p>  If you want your changes to a slide to survive between page reloads you can define a data-save attribute which will save it to the attributes value in localstorage. Make a code change, hit run/save and reload this slide.</p>
+<p> You can also use the same 'data-save'  attribute on mulitiple slides to keep the same code moving forwad</p>
+<textarea class='coder-editor' data-save='dummy'>
+  <h1>This is some dummy content..</h1>
+</textarea>
+</article>
+
+
+<article class='slide slide-list'>
+<h2>Solutions</h2>
+<p>If you want to add a solution to an exercise, you can add a coderdeck-solution script tag in the slide </p>
+<textarea class='coder-editor'>
+
+<script>
+    // Display an alert message
+    // if a confirm dialog returns true
+</script>
+</textarea>
+
+<script type='coder-solution'>
+SCRIPT
+  if(confirm("Do you want an alert?")) {
+      alert("Yay!");
+  }
+SCRIPTEND
+</script>
+</article>
+
+<script src='dist/coderdeck.min.js'></script>
+
+<script>
+	$(function() {
+		$.deck('.slide');
+	});
+</script>
+</body>
+</html>
