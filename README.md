@@ -16,13 +16,13 @@ Building your own Decks
 ==================
 
 Run `make` to install the submodules of deck.js and codermirror2 and uglify and minify everything into the dist directory,
-then copy the `sample-dist.html` along with the `dist/` directory to another directory, rename sample-dist.html to index.html
-and start making.
+then copy the `sample-dist.html` along with the `dist/` directory to another directory, use `sample-dist.html` as a 
+starting point or make your own.
 
-`dist/coderdeck.css` is an optional theme - you can use try other deck.js themes (let us know how they work)
+`dist/coderdeck.css` is an optional theme made for coderdeck - you can use try other deck.js themes (let us know how they work)
 
 
 Contributors
 ============
 
-[marcneuwirth][https://github.com/marcneuwirth] added Gist support.
+[marcneuwirth](https://github.com/marcneuwirth) added Gist support.
