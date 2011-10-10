@@ -3623,7 +3623,8 @@ This module adds a code editor that shows up in individual slides
 
 (function($, deck, window, undefined) {
   var $d = $(document),
-  $window = $(window);
+    $window = $(window),
+    savedGistData = {};
 
   function unsanitize(str) {
    return addScript(str).replace(/&lt;/g,'<').replace(/&gt;/g,'>');
@@ -3681,6 +3682,8 @@ This module adds a code editor that shows up in individual slides
       language:   $element.attr('data-language')
     };
 
+    slide.attr('data-slide-id', idx);
+
     var fullClass = config.isFull ? " coder-wrapper-full" : " coder-wrapper-split";
 
     slide.find(".coder-editor").attr({
@@ -3695,6 +3698,13 @@ This module adds a code editor that shows up in individual slides
     }
 
     $element.data("config", config);
+
+
+    // If we're showing the current slide,
+    // launch the editors/etc
+    if($.deck('getSlide')[0] == $el[0]) {
+      displayCodeSlide($el);
+    }
   }
 
   function loadFromLocalStorage($element,config) {
@@ -3798,7 +3808,80 @@ This module adds a code editor that shows up in individual slides
     }
   }
 
+  function getGist(gistId) {
+    url = 'https://api.github.com/gists/' + gistId + '?callback=?';
+    $.getJSON(url, function(gistData) {
+      var $gists = savedGistData[gistId],
+      length = $gists.length;
+      while(length--){
+        var $gist = $($gists[length]);
+        updateGistSlide( $gist, gistData );  
+      }
+    });
+  }
+
+  function updateGistSlide($gist, gistData) {
+    var content = gistData.data.files["gistfile1.txt"].content,
+    id = gistData.data.id,
+    slide = $gist.parents('.slide'),
+    type = $gist.attr('type'),
+    classes = $gist.attr('data-gist-classes'),
+    template = $gist.attr('data-coder-template') || '',
+    language =  $gist.attr('data-language') || '',
+    save = $gist.attr('data-save') || '';
+
+    if(type === 'text/coderdeck') {
+      $el = $('<script />')
+      .attr('id', $gist.attr('id'))
+      .attr('type', type);
+    }
+    else {
+      $el = $('<textarea />');
+    }
+
+    $el.addClass(classes)
+    .attr('data-coder-template', template)
+    .attr('data-language', language)
+    .attr('data-save', save)
+    .text(content)
+    .find("a")
+    .attr('target','_blank')
+    .end();
+
+    $gist.after($el).remove();
+
+
+    prepareSlide(slide.attr('data-slide-id'), slide);
+
+  }
+
+
+  function displayCodeSlide(slide) {
+    slide.find(".coder-wrapper").each(function() {
+      var $container = $(this);
+      if(!$container.hasClass('coderEditor')) {
+        generateCodeSlide($container,slide);
+      }
+      resizeEditors(slide,$container);
+    });
+
+  }
+
   $d.bind('deck.init',function() {
+
+    $('.gist[data-gist-id]').each(function(idx) {
+      var $gist = $(this);
+      var gistId = $gist.attr('data-gist-id');
+
+      savedGistData[gistId] = savedGistData[gistId] || [];
+      savedGistData[gistId].push($gist);
+    });
+
+    for(var id in savedGistData){
+      getGist(id);
+    }
+
+
     $("a").attr('target','_blank');
     $.each($[deck]('getSlides'), prepareSlide);
   });
@@ -3807,13 +3890,7 @@ This module adds a code editor that shows up in individual slides
   $d.bind('deck.change',function(e,from,to) {
     var current =$[deck]('getSlide', to);
 
-    current.find(".coder-wrapper").each(function() {
-      var $container = $(this);
-      if(!$container.hasClass('coderEditor')) {
-        generateCodeSlide($container,current);
-      }
-      resizeEditors(current,$container);
-    });
+    displayCodeSlide(current);
   });
 
 })(jQuery,'deck',this);
