@@ -14,6 +14,15 @@ Deck.js, CodeMirror2, jQuery et al are (c) their respective owners.
 
 Building your own Decks
 ==================
+Download the pre-built package which includes a index.html file and all required resources in the dist/ directory:
+
+https://github.com/downloads/cykod/CoderDeck/CoderDeck-0.0.1.tar.gz
+
+Edit the index.html file (don't forget the title tag) to build your presentation.
+
+Building from scratch
+===================
+CoderDeck requires node.js to build, concatenate and uglify everything up.
 
 Run `make` to install the submodules of deck.js and codermirror2 and uglify and minify everything into the dist directory,
 then copy the `sample-dist.html` along with the `dist/` directory to another directory, use `sample-dist.html` as a 
