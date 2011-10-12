@@ -20,18 +20,19 @@ This module adds a code editor that shows up in individual slides
   }
 
   function addScript(str) {
-   return str.replace(/SCRIPTEND/,'</s' + 'cript>').replace(/SCRIPT/g,'<script>')
+   return str.replace(/SCRIPTEND/g,'</s' + 'cript>').replace(/SCRIPT/g,'<script>')
   }
 
   function runCode(element,template) {
     iframe = document.createElement("IFRAME"); 
-    iframe.style.width = ($(element).parent().width()-2) + "px";
-    iframe.style.height = ($(element).parent().height()-2) + "px";
-    iframe.style.overflow = 'auto';
-    iframe.style.border ="none";
 
     var dest = $(element).attr('data-target');
     var destination = $("#" + dest );
+    iframe.style.width = (destination.parent().width()-2) + "px";
+    iframe.style.height = (destination.parent().height()-2) + "px";
+    iframe.style.overflow = 'auto';
+    iframe.style.border ="none";
+
     $(destination).html("").append(iframe);
 
 
