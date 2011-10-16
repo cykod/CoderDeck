@@ -5,15 +5,18 @@
 
 }
 
-.coder-wrapper {
+.deck-container .coder-wrapper {
   width:100%; 
   position:relative;
-
+  border:1px solid #CCC;
+  border-radius: 15px;
+  padding: 5px 0px;
+  box-shadow: 4px 4px 10px #CCC;
 }  
 
 .deck-container .coder-editor-wrapper { 
-  border:1px solid #CCCCCC;
   padding:5px 1%;
+  border-right:1px solid #CCC;
 }
 
 .deck-container .coder-editor-wrapper pre {
@@ -24,23 +27,41 @@
 .deck-container .coder-destination { 
   display:none;
   padding:5px 1%;
-  border:1px solid #CCCCCC;
 }
 
 
 .deck-container .coder-wrapper-split .coder-editor-wrapper { 
-  border:1px solid #CCCCCC;
-  padding:5px 1%;
   width:48%;
 }
 
 
 .deck-container .coder-wrapper-split .coder-destination { 
-  border:1px solid #CCCCCC;
   padding:5px 1%;
   position:absolute; left:50%; bottom:0px;
   width:48%;
 
 }
 
+.deck-container .coder-wrapper .coder-buttons {
+  position:absolute;
+  top:5px;
+  z-index:100;
+  right: 3%;
 
+}
+
+.deck-container .coder-wrapper .coder-buttons button {
+	border:none;
+	border-radius:8px;
+	padding:8px 12px;
+	color:white;
+	font-size:14px;
+	background-color:#CCC;
+	margin-left:5px;
+	
+
+}
+
+.deck-container .coder-wrapper-split .coder-buttons {
+  right: 53%;
+}
