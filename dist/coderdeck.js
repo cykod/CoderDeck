@@ -3631,18 +3631,19 @@ This module adds a code editor that shows up in individual slides
   }
 
   function addScript(str) {
-   return str.replace(/SCRIPTEND/,'</s' + 'cript>').replace(/SCRIPT/g,'<script>')
+   return str.replace(/SCRIPTEND/g,'</s' + 'cript>').replace(/SCRIPT/g,'<script>')
   }
 
   function runCode(element,template) {
     iframe = document.createElement("IFRAME"); 
-    iframe.style.width = ($(element).parent().width()-2) + "px";
-    iframe.style.height = ($(element).parent().height()-2) + "px";
-    iframe.style.overflow = 'auto';
-    iframe.style.border ="none";
 
     var dest = $(element).attr('data-target');
     var destination = $("#" + dest );
+    iframe.style.width = (destination.parent().width()-2) + "px";
+    iframe.style.height = (destination.parent().height()-2) + "px";
+    iframe.style.overflow = 'auto';
+    iframe.style.border ="none";
+
     $(destination).html("").append(iframe);
 
 
@@ -3742,17 +3743,22 @@ This module adds a code editor that shows up in individual slides
     return editor;
   }
 
+  function createButtonWrapper($wrapper) {
+    return $("<div class='coder-buttons'>").insertBefore($wrapper);
+
+  }
+
   function createBackbutton($wrapper,callback) {
-    return $("<button>Back</button>").insertBefore($wrapper).click(callback).hide();
+    return $("<button>Back</button>").appendTo($wrapper).click(callback).hide();
   }
 
   function createSolution($wrapper,callback) {
-    return $("<button>Solution</button>").insertBefore($wrapper).click(callback);
+    return $("<button>Solution</button>").appendTo($wrapper).click(callback);
   }
 
   function createRunButton(config,$wrapper,callback) {
     var buttonName = config.isSaving ? "Run/Save" : "Run";
-    return $("<button>" + buttonName + "</button>").insertBefore($wrapper).click(callback);
+    return $("<button>" + buttonName + "</button>").appendTo($wrapper).click(callback);
   }
 
   function resizeEditors(currentSlide,$container) {
@@ -3781,8 +3787,10 @@ This module adds a code editor that shows up in individual slides
 
     var $backButton = null;
 
+    var $buttonWrapper = createButtonWrapper($wrapper);
+
     if(!config.isInstant) {
-      createRunButton(config,$wrapper, function() {
+      createRunButton(config,$buttonWrapper, function() {
         if(config.isFull) {  
           $backButton.show();
           $wrapper.hide();
@@ -3793,14 +3801,14 @@ This module adds a code editor that shows up in individual slides
     }
 
     if(config.isFull) { 
-      $backButton = createBackbutton($wrapper,function() {
+      $backButton = createBackbutton($buttonWrapper,function() {
         $destination.toggle();
         $wrapper.toggle();
       });
     }
 
     if(config.isSolution) {
-      createSolution($wrapper,function() {
+      createSolution($buttonWrapper,function() {
         var solution = $element.attr('data-solution');
         editor.setValue(unsanitize($("#" + solution).html()));
       });
