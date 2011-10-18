@@ -68,8 +68,9 @@
   .deck-container h3 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 800; }
-  .deck-container pre {
-    border-color: #d3502c; }
+  .deck-container .slide > pre {
+    padding:10px;
+    border-color: #ccc; }
   .deck-container code {
     color: #888; }
   .deck-container blockquote {

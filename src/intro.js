@@ -28,6 +28,10 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  *
+ * Inclues Prettify
+ * http://code.google.com/p/google-code-prettify/
+ * Licensed under the Apache 2.0 license
+ *
  * Date: 
  */
                 

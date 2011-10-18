@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="src/deck.js/extensions/status/deck.status.css">
 	<link rel="stylesheet" href="src/deck.js/extensions/hash/deck.hash.css">
 	<link rel="stylesheet" href="src/deck.js/extensions/menu/deck.menu.css">
+	<link rel="stylesheet" href="src/css/prettify.css">
 	<link rel="stylesheet" href="src/css/deck.coder.css">
 	
 
@@ -91,6 +92,25 @@
 </footer>	
 </textarea>
 </article>
+
+<article class='slide slide-list'>
+<h2>How to use it?</h2>
+<p>Download a release and modify the index.html with your slide. Slides are created with by adding a class='slide' to any element. CoderDeck areas are created
+	by adding a class of 'coder-editor' to a text area, for example (prettyprint is also bundled, so, as below just use a &lt;pre class='prettyprint'&gt;.. to highlight static code):</p>
+<pre class='prettyprint'>
+&lt;article class='slide slide-list'&gt;
+  &lt;h2&gt;This is a second level heading!&lt;/h2&gt;
+  &lt;p&gt;Here is some descriptive text, followed by a split editor. &lt;/p&gt;
+  &lt;textarea class='coder-editor'&gt;
+    &lt;script&gt;
+       alert("Yay!");
+    &lt;/script&gt; 
+  &lt;textarea&gt;
+&lt;/article&gt;
+</pre>
+
+</article>
+
 
 <!-- Apply a class of "coder-editor-full" along with "coder-editor" to a textarea to make it show up as runnable code -->
 <article class='slide slide-list'>
@@ -232,6 +252,8 @@ SCRIPTEND
 <script src="src/codemirror/mode/javascript/javascript.js"></script>
 <script src="src/codemirror/mode/htmlmixed/htmlmixed.js"></script>
 
+<!-- Prettify -->
+<script src="src/prettify.js"></script>
 
 <!-- Deck Core and extensions -->
 <script src="src/deck.js/extensions/status/deck.status.js"></script>

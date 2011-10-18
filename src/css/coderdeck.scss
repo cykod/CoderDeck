@@ -1,6 +1,7 @@
 $main-color:#444;
 $callout-color:#bf0000;
 $complimentary-color:#d3502c;
+$gray-color:#CCC;
 
 @mixin sans-font {
 	font-family:'Open Sans', sans-serif;
@@ -79,8 +80,9 @@ $complimentary-color:#d3502c;
 
 	}
 
-	pre {
-		border-color:$complimentary-color;
+	.slide > pre {
+                padding:10px;
+		border-color:$gray-color;
 	}
 
 	code {

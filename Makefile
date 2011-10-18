@@ -18,6 +18,7 @@ BASE_FILES = ${SRC_DIR}/jquery.tmpl.min.js\
 	${SRC_DIR}/codemirror/mode/htmlmixed/htmlmixed.js\
 	${SRC_DIR}/deck.js/extensions/status/deck.status.js\
 	${SRC_DIR}/deck.js/extensions/navigation/deck.navigation.js\
+	${SRC_DIR}/prettify.js\
 	${SRC_DIR}/deck.coder.js\
 	${SRC_DIR}/deck.js/extensions/hash/deck.hash.js\
 	${SRC_DIR}/deck.js/extensions/menu/deck.menu.js
@@ -29,6 +30,7 @@ CSS_FILES = ${SRC_DIR}/deck.js/core/deck.core.css\
 	${SRC_DIR}/deck.js/extensions/hash/deck.hash.css\
 	${SRC_DIR}/deck.js/extensions/menu/deck.menu.css\
 	${SRC_DIR}/css/deck.coder.css\
+	${SRC_DIR}/css/prettify.css\
 	${SRC_DIR}/codemirror/lib/codemirror.css\
 	${SRC_DIR}/codemirror/theme/default.css
 
