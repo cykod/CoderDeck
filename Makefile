@@ -2,8 +2,13 @@ SRC_DIR = src
 TEST_DIR = test
 BUILD_DIR = build
 
+CODERDECK_VER = $(shell cat version.txt)
+
 PREFIX = .
-DIST_DIR = ${PREFIX}/dist
+PACKAGE_DIR = ${PREFIX}/dist
+OUTPUT_NAME = CoderDeck-${CODERDECK_VER}
+DIST_DIR = ${PREFIX}/dist/${OUTPUT_NAME}/dist
+OUTPUT_FILE = ${PREFIX}/dist/${OUTPUT_NAME}.tar.gz
 
 JS_ENGINE ?= `which node nodejs`
 COMPILER = ${JS_ENGINE} ${BUILD_DIR}/uglify.js --unsafe
@@ -43,14 +48,13 @@ CODERDECK_MIN = ${DIST_DIR}/coderdeck.min.js
 
 CSS_MIN = ${DIST_DIR}/coderdeck-core.min.css
 
-CODERDECK_VER = $(shell cat version.txt)
 VER = sed "s/@VERSION/${CODERDECK_VER}/"
 
 DATE=$(shell git log -1 --pretty=format:%ad)
 
 all: update_submodules core
 
-core: coderdeck css jquery min
+core: coderdeck css jquery min ${OUTPUT_FILE}
 	@@echo "Coderdeck build complete."
 
 ${DIST_DIR}:
@@ -83,17 +87,26 @@ ${CODERDECK_MIN}: ${CODERDECK}
 		${POST_COMPILER} ${CODERDECK_MIN}.tmp > ${CODERDECK_MIN}; \
 		rm -f ${CODERDECK_MIN}.tmp; \
 	else \
-		echo "You must have NodeJS installed in order to minify jQuery."; \
+		echo "You must have NodeJS installed in order to minify CoderDeck."; \
 	fi
 
+${OUTPUT_FILE}: 
+	@@echo "Tarring"
+	cp ${PREFIX}/sample-dist.html ${PACKAGE_DIR}/${OUTPUT_NAME}/index.html; \
+	cp ${PREFIX}/MIT-LICENSE.txt ${PACKAGE_DIR}/${OUTPUT_NAME}/; \
+	cp ${PREFIX}/GPL-LICENSE.txt ${PACKAGE_DIR}/${OUTPUT_NAME}/; \
+	cp ${PREFIX}/README.md ${PACKAGE_DIR}/${OUTPUT_NAME}/; \
+	cd ${PACKAGE_DIR} && tar -czvf ${OUTPUT_NAME}.tar.gz ${OUTPUT_NAME}
+
+
 clean:
-	@@echo "Removing Distribution directory:" ${DIST_DIR}
-	@@rm -rf ${DIST_DIR}
+	@@echo "Removing Distribution directory:" ${PACKAGE_DIR}
+	@@rm -rf ${PACKAGE_DIR}
 
 distclean: clean
 	@@echo "Removing submodules"
 
-# change pointers for submodules and update them to what is specified in jQuery
+# change pointers for submodules and update them to what is specified in CoderDeck 
 # --merge  doesn't work when doing an initial clone, thus test if we have non-existing
 #  submodules, then do an real update
 update_submodules:
