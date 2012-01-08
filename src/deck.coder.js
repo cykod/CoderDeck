@@ -28,6 +28,7 @@ This module adds a code editor that shows up in individual slides
 
     var dest = $(element).attr('data-target');
     var destination = $("#" + dest );
+    iframe.className = "coder-iframe";
     iframe.style.width = (destination.parent().width()-2) + "px";
     iframe.style.height = (destination.parent().height()-2) + "px";
     iframe.style.overflow = 'auto';
@@ -205,6 +206,20 @@ This module adds a code editor that shows up in individual slides
     }
   }
 
+  function killDestination(slide) {
+    slide.find(".coder-wrapper").each(function() {
+      var $container = $(this);
+      if($container.hasClass('coderEditor')) {
+        var $element = $container.find('.coder-editor');
+        var $wrapper = $container.find('.coder-editor-wrapper');
+        var $destination = $("#" + $element.attr('data-target'));
+
+        $wrapper.show();
+        $destination.html("").hide();
+      }
+    });
+  }
+
   function getGist(gistId) {
     url = 'https://api.github.com/gists/' + gistId + '?callback=?';
     $.getJSON(url, function(gistData) {
@@ -264,6 +279,7 @@ This module adds a code editor that shows up in individual slides
 
   }
 
+
   $d.bind('deck.init',function() {
 
     $('.gist[data-gist-id]').each(function(idx) {
@@ -287,6 +303,9 @@ This module adds a code editor that shows up in individual slides
 
 
   $d.bind('deck.change',function(e,from,to) {
+    var last = $[deck]('getSlide',from);
+    if(last) { killDestination(last);  }
+
     var current =$[deck]('getSlide', to);
 
     displayCodeSlide(current);

@@ -16,7 +16,7 @@ Building your own Decks
 ==================
 Download the pre-built package which includes a index.html file and all required resources in the dist/ directory:
 
-https://github.com/downloads/cykod/CoderDeck/CoderDeck-0.0.3.tar.gz
+https://github.com/downloads/cykod/CoderDeck/CoderDeck-0.0.4.tar.gz
 
 Edit the index.html file (don't forget the title tag) to build your presentation.
 
