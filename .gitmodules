@@ -3,4 +3,4 @@
 	url = https://github.com/imakewebthings/deck.js.git
 [submodule "src/codemirror"]
 	path = src/codemirror
-	url = https://github.com/marijnh/CodeMirror2.git
+	url = https://github.com/marijnh/CodeMirror.git
